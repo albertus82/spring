@@ -7,6 +7,14 @@
 		<title>Home Page</title>
 	</head>
 	<body>
-		Benvenuto ${username}!
+		<h1>
+			Benvenuto ${utente.nome}!
+		</h1>
+		
+		<ul>
+			<c:forEach items="${lista}" var="elemento">
+				<li>${elemento}</li>
+			</c:forEach>
+		</ul>
 	</body>
 </html>
