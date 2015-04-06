@@ -7,15 +7,15 @@ import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-@Component
+//@Component
 public class Cavaliere {
-	
+
 	@Autowired
 	private Logger log;
-		
-	@Resource(name="salvataggio")
+
+//	@Resource(name = "salvataggio")
 	private Missione missione;
-	
+
 	public String toString() {
 		log.info("Sono nel toString()!", getClass());
 		return "Salve, sono Re Artu'";
@@ -25,13 +25,12 @@ public class Cavaliere {
 		return missione;
 	}
 
-	
 	public void setMissione(Missione missione) {
 		this.missione = missione;
 	}
-	
+
 	public void imbarcati() {
-		System.out.println(missione.toString());
+		System.out.println(getClass().getSimpleName() + ": " + missione.toString());
 	}
 
 }

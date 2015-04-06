@@ -22,8 +22,9 @@ public class Main {
 		Cavaliere artu = (Cavaliere)context.getBean("cavaliere");
 		System.out.println(artu.toString());
 		artu.imbarcati();
-		Missione idontknow = (Missione)context.getBean("dragone");
-		System.out.println(idontknow.toString());
+		Missione idontknow = (Missione)context.getBean("uccidiIldragone");
+		System.out.println("Bean dragone preso separatamente: " + idontknow.toString());
+		System.out.println(idontknow == artu.getMissione());
 	}
 	
 	@Bean

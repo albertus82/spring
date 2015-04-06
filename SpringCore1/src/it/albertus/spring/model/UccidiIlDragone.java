@@ -2,7 +2,7 @@ package it.albertus.spring.model;
 
 import org.springframework.stereotype.Component;
 
-@Component("dragone")
+//@Component("dragone")
 public class UccidiIlDragone implements Missione {
 	
 	@Override

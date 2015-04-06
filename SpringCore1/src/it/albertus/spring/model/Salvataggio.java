@@ -2,7 +2,7 @@ package it.albertus.spring.model;
 
 import org.springframework.stereotype.Component;
 
-@Component
+//@Component
 public class Salvataggio implements Missione {
 
 	@Override
