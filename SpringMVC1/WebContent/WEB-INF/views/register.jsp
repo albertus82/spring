@@ -6,17 +6,17 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-		<title>Pagina di accesso</title>
+		<title>Pagina di registrazione</title>
 	</head>
 	<body style="font-family: verdana, sans-serif;">
-		<h1 style="text-align: center;">Accesso</h1>
+		<h1 style="text-align: center;">Registrazione</h1>
 	
 		<!-- Eventuale messaggio -->
 		<c:if test="${not empty requestScope.messaggio}">
 			<div style="color:red; text-align:center; margin:1em;"><strong>${requestScope.messaggio}</strong></div>
 		</c:if>
 		
-		<form:form action="login" method="POST">
+		<form action="register" method="POST">
 			<table style="margin: auto;" cellpadding="4">
 				<tr>
 					<td>Username</td>
@@ -27,12 +27,24 @@
 					<td><input type="text" name="password" /></td>
 				</tr>
 				<tr>
+					<td>Nome</td>
+					<td><input type="text" name="nome" /></td>
+				</tr>
+				<tr>
+					<td>Cognome</td>
+					<td><input type="text" name="cognome" /></td>
+				</tr>
+				<tr>
+					<td>Data di nascita</td>
+					<td><input type="text" name="dataNascita" /></td>
+				</tr>
+				<tr>
 					<td colspan="2" style="text-align: center;">
-						<input type="submit" value="Accedi" style="width: 100%;" />
+						<input type="submit" value="Conferma" style="width: 100%;" />
 					</td>
 				</tr>
 			</table>
-		</form:form>
+		</form>
 		
 	</body>
 </html>
