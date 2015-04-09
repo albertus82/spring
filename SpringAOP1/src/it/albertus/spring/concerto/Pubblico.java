@@ -8,25 +8,25 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Aspect
-public class Audience {
+public class Pubblico {
 
 	@Before("execution(** it.albertus.spring.concerto.Esecuzione.esegui(..))")
 	public void silenceCellPhones() {
-		System.out.println("Silencing cell phones");
+		System.out.println("Spegne telefoni cellulari");
 	}
 
 	@Before("execution(** it.albertus.spring.concerto.Esecuzione.esegui(..))")
 	public void takeSeats() {
-		System.out.println("Taking seats");
+		System.out.println("Prende posto");
 	}
 
 	@AfterReturning("execution(** it.albertus.spring.concerto.Esecuzione.esegui(..))")
 	public void applause() {
-		System.out.println("CLAP CLAP CLAP!!!");
+		System.out.println("Applausi!!!");
 	}
 
 	@AfterThrowing("execution(** it.albertus.spring.concerto.Esecuzione.esegui(..))")
 	public void demandRefund() {
-		System.out.println("Demanding a refund");
+		System.out.println("Richiede rimborso");
 	}
 }
