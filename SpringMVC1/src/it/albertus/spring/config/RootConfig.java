@@ -2,11 +2,13 @@ package it.albertus.spring.config;
 
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ComponentScan.Filter;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
+import org.springframework.context.annotation.Scope;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -23,7 +25,7 @@ public class RootConfig {
 	
 	/** Gestisce la connessione al database. */
 	@Bean
-	public DataSource dataSource() {
+	protected DataSource dataSource() {
 		DriverManagerDataSource ds = new DriverManagerDataSource();
 		ds.setDriverClassName("oracle.jdbc.driver.OracleDriver");
 		ds.setUrl("jdbc:oracle:thin:@localhost:1521:XE");
@@ -34,7 +36,7 @@ public class RootConfig {
 	
 	/** Permette di effettuare facilmente operazioni sul database usando JDBC. */
 	@Bean
-	public NamedParameterJdbcTemplate jdbcTemplate(DataSource dataSource) {
+	protected NamedParameterJdbcTemplate jdbcTemplate(DataSource dataSource) {
 		return new NamedParameterJdbcTemplate(dataSource);
 	}
 	
@@ -43,7 +45,8 @@ public class RootConfig {
 	 *  @Transactional quale si vuole usare, pena "NoUniqueBeanDefinitionException".
 	 */
 	@Bean
-	public DataSourceTransactionManager transactionManager(DataSource dataSource) {
+	@Scope(ConfigurableBeanFactory.SCOPE_SINGLETON) // E' il valore di default.
+	protected DataSourceTransactionManager transactionManager(DataSource dataSource) {
 		return new DataSourceTransactionManager(dataSource);
 	}
 	

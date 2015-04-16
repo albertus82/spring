@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -19,11 +20,11 @@ public class LoginController {
 
 	@RequestMapping(value = { "/login" }, method = RequestMethod.GET)
 	public String login() {
-		return "login";
+		return "login"; // Forward!
 	}
 
 	@RequestMapping(value = { "/login" }, method = RequestMethod.POST)
-	public String login(Utente utente, HttpServletRequest request, HttpSession session) {
+	public String login(Utente utente, HttpServletRequest request, HttpSession session, Model model) {
 		String forward;
 		Utente autenticato = utenteService.auth(utente.getUsername(), utente.getPassword());
 		if (autenticato == null) {
@@ -33,15 +34,16 @@ public class LoginController {
 		else {
 			utente = autenticato;
 			session.setAttribute("utente", utente);
-			forward = "home";
+			forward = "redirect:home"; // Redirect!
 		}
 		return forward;
 	}
 
 	@RequestMapping(value = { "/logout" }) // , method = RequestMethod.GET)
-	public String logout(HttpSession session) {
+	public String logout(HttpSession session, Model model) {
 		session.invalidate();
-		return "login";
+		model.addAttribute("messaggio", "Logout effettuato.");
+		return "redirect:login?messaggio={messaggio}";
 	}
 
 }

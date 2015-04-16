@@ -52,7 +52,7 @@ public class UtenteDAOImpl extends BaseDAO implements UtenteDAO {
 			utente = null;
 		}
 		catch (Exception e) {
-			log.error("Autenticazione fallita per altri motivi (database non disponibile, ecc.)." + ExceptionUtils.getStackTrace(e));
+			log.error("Autenticazione fallita per altri motivi (database non disponibile, ecc.).\r\n" + ExceptionUtils.getStackTrace(e));
 			utente = null;
 		}
 

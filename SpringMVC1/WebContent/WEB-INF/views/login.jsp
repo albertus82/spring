@@ -12,8 +12,8 @@
 		<h1 style="text-align: center;">Accesso</h1>
 	
 		<!-- Eventuale messaggio -->
-		<c:if test="${not empty requestScope.messaggio}">
-			<div style="color:red; text-align:center; margin:1em;"><strong>${requestScope.messaggio}</strong></div>
+		<c:if test="${not empty requestScope.messaggio ne not empty param.messaggio}"> <%-- In EL non esiste XOR --%>
+			<div style="color:red; text-align:center; margin:1em;"><strong>${requestScope.messaggio}${param.messaggio}</strong></div>
 		</c:if>
 		
 		<form:form action="login" method="POST">
