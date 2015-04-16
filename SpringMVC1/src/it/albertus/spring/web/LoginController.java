@@ -18,6 +18,11 @@ public class LoginController {
 	@Autowired
 	private UtenteService utenteService;
 
+	@RequestMapping(value = { "/" })
+	public String welcome() {
+		return "redirect:login"; // Redirect!
+	}
+
 	@RequestMapping(value = { "/login" }, method = RequestMethod.GET)
 	public String login() {
 		return "login"; // Forward!
@@ -34,12 +39,12 @@ public class LoginController {
 		else {
 			utente = autenticato;
 			session.setAttribute("utente", utente);
-			forward = "redirect:home"; // Redirect!
+			forward = "redirect:home";
 		}
 		return forward;
 	}
 
-	@RequestMapping(value = { "/logout" }) // , method = RequestMethod.GET)
+	@RequestMapping(value = { "/logout" })
 	public String logout(HttpSession session, Model model) {
 		session.invalidate();
 		model.addAttribute("messaggio", "Logout effettuato.");

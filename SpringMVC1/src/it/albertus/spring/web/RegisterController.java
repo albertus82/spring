@@ -20,7 +20,7 @@ public class RegisterController {
 
 	@RequestMapping(value = { "/register" }, method = RequestMethod.GET)
 	public String register() {
-		return "register";
+		return "register"; // Forward!
 	}
 
 	@RequestMapping(value = { "/register" }, method = RequestMethod.POST)
