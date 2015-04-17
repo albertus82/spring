@@ -13,19 +13,19 @@ public class Utente implements Serializable {
 	private static final long serialVersionUID = -8469030823598758896L;
 
 	@NotNull
-	@Size(min=1, max=50, message="Il nome \u00E8 obbligatorio e non pu\u00F2 essere pi\u00F9 lungo di 50 caratteri.")
+	@Size(min=1, max=50, message="Il nome \u00E8 obbligatorio e non pu\u00F2 essere pi\u00F9 lungo di {max} caratteri.")
 	private String nome;
 	
 	@NotNull
-	@Size(min=1, max=50, message="Il cognome \u00E8 obbligatorio e non pu\u00F2 essere pi\u00F9 lungo di 50 caratteri.")
+	@Size(min=1, max=50, message="Il cognome \u00E8 obbligatorio e non pu\u00F2 essere pi\u00F9 lungo di {max} caratteri.")
 	private String cognome;
 	
 	@NotNull
-	@Size(min=1, max=50, message="L'username \u00E8 obbligatorio e non pu\u00F2 essere pi\u00F9 lungo di 50 caratteri.")
+	@Size(min=1, max=50, message="L'username \u00E8 obbligatorio e non pu\u00F2 essere pi\u00F9 lungo di {max} caratteri.")
 	private String username;
 	
 	@NotNull
-	@Size(min=1, max=50, message="La password \u00E8 obbligatoria e non pu\u00F2 essere pi\u00F9 lunga di 50 caratteri.")
+	@Size(min=1, max=50, message="La password \u00E8 obbligatoria e non pu\u00F2 essere pi\u00F9 lunga di {max} caratteri.")
 	private transient String password;
 	
 	@DateTimeFormat(pattern="dd/MM/yyyy")
