@@ -16,21 +16,21 @@ public class Pubblico {
 
 	@Before("esecuzione()")
 	public void silenceCellPhones() {
-		System.out.println("Spegne telefoni cellulari");
+		System.out.println(getClass().getName() + " - " + "Spegne telefoni cellulari");
 	}
 
 	@Before("esecuzione()")
 	public void takeSeats() {
-		System.out.println("Prende posto");
+		System.out.println(getClass().getName() + " - " + "Prende posto");
 	}
 
 	@AfterReturning("esecuzione()")
 	public void applause() {
-		System.out.println("Applausi!!!");
+		System.out.println(getClass().getName() + " - " + "Applausi!!!");
 	}
 
 	@AfterThrowing("esecuzione()")
 	public void demandRefund() {
-		System.out.println("Richiede rimborso");
+		System.out.println(getClass().getName() + " - " + "Richiede rimborso");
 	}
 }
