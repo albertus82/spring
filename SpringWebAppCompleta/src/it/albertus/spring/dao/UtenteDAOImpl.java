@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 @Repository
+// Non occorre specificare il nome del bean PlatformTransactionManager ("transactionManager") se ne esiste solo uno!
 @Transactional(value = "transactionManager", propagation = Propagation.SUPPORTS)
 public class UtenteDAOImpl extends BaseDAO implements UtenteDAO {
 
