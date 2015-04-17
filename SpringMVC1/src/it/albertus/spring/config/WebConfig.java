@@ -14,6 +14,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @ComponentScan("it.albertus.spring.web")
 public class WebConfig extends WebMvcConfigurerAdapter {
 
+	/** Configurazione del resolver per le JSP */
 	@Bean
 	public ViewResolver viewResolver() {
 		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
@@ -23,6 +24,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 		return resolver;
 	}
 
+	/** Configurazione gestione dei contenuti statici */
 	@Override
 	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
 		configurer.enable();

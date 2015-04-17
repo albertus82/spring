@@ -16,7 +16,7 @@ public class HomeController {
 
 	@RequestMapping(value = { "/{nome}/{cognome}" }, method = RequestMethod.GET)
 	public String home(@PathVariable("nome") String name, @PathVariable("cognome") String cognome, ModelMap map) {
-		
+
 		Utente utente = new Utente();
 		utente.setNome(name);
 		utente.setCognome(cognome);
@@ -26,11 +26,11 @@ public class HomeController {
 		set.add(utente.getNome());
 		set.add(utente.getCognome());
 		map.addAttribute("lista", set);
-		
+
 		return "home";
 	}
-	
-	@RequestMapping(value = { "/{nome}"}, method = RequestMethod.GET)
+
+	@RequestMapping(value = { "/{nome}" }, method = RequestMethod.GET)
 	public String home(@PathVariable("nome") String name, ModelMap map) {
 		Utente utente = new Utente();
 		utente.setNome(name);

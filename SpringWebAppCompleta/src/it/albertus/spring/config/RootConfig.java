@@ -40,9 +40,10 @@ public class RootConfig {
 		return new NamedParameterJdbcTemplate(dataSource);
 	}
 	
-	/** Gestisce la transazionalita' dei metodi che accedono al database.
-	 *  In presenza di piu' transaction manager, bisogna specificare in
-	 *  @Transactional quale si vuole usare, pena "NoUniqueBeanDefinitionException".
+	/** 
+	 * Gestisce la transazionalita' dei metodi che accedono al database.
+	 * In presenza di piu' transaction manager, bisogna specificare in
+	 * @Transactional quale si vuole usare, pena "NoUniqueBeanDefinitionException".
 	 */
 	@Bean
 	@Scope(ConfigurableBeanFactory.SCOPE_SINGLETON) // E' il valore di default.
