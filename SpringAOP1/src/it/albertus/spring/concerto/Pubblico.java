@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 @Aspect
 public class Pubblico {
 	
-	@Pointcut("execution(** it.albertus.spring.concerto.Esecuzione.esegui(..))")
+	@Pointcut("execution(** it.albertus.spring.concerto.Esecuzione.esegui(..))") // Si puo' specificare sia Esecuzione che Sinfonia.
 	private void esecuzione() {}; // Marcatore
 
 	@Before("esecuzione()")
