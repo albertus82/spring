@@ -32,9 +32,9 @@ public class HomeController {
 	
 	@RequestMapping(value = { "/{nome}"}, method = RequestMethod.GET)
 	public String home(@PathVariable("nome") String name, ModelMap map) {
-//		Utente utente = new Utente();
-//		utente.setNome(name);
-//		map.addAttribute("utente", utente);
+		Utente utente = new Utente();
+		utente.setNome(name);
+		map.addAttribute("utente", utente);
 		return "home";
 	}
 }
