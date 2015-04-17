@@ -24,7 +24,7 @@
 				</tr>
 				<tr>
 					<td>Password</td>
-					<td><input type="text" name="password" /></td>
+					<td><input type="password" name="password" /></td>
 				</tr>
 				<tr>
 					<td colspan="2" style="text-align: center;">
