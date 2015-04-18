@@ -29,7 +29,7 @@ public class RegisterController {
 		try {
 			utenteService.save(utente);
 			model.addAttribute("messaggio", "Registrazione effettuata!");
-			forward = "redirect:login?messaggio={messaggio}";
+			forward = "redirect:customlogin?messaggio={messaggio}";
 		}
 		catch (Exception e) {
 			request.setAttribute("messaggio", "Errore di registrazione: " + e.getLocalizedMessage());

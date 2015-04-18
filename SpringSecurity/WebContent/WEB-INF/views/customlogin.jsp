@@ -9,14 +9,16 @@
 		<title>Pagina di accesso</title>
 	</head>
 	<body style="font-family: verdana, sans-serif;">
-		<h1 style="text-align: center;">Accesso</h1>
+		<h1 style="text-align:center;">Accesso</h1>
 	
-		<!-- Eventuale messaggio -->
-		<c:if test="${not empty requestScope.messaggio ne not empty param.messaggio}"> <%-- In EL non esiste XOR --%>
-			<div style="color:red; text-align:center; margin:1em;"><strong>${requestScope.messaggio}${param.messaggio}</strong></div>
+		<%-- Eventuale messaggio di errore --%>
+		<c:if test="${param.error ne null}">
+			<div style="color:red; text-align:center; margin:1em;">
+				<strong>Utenza non valida!</strong>
+			</div>
 		</c:if>
 		
-		<form:form action="login" method="POST">
+		<form:form action="customlogin" method="POST">
 			<table style="margin: auto;" cellpadding="4">
 				<tr>
 					<td>Username</td>

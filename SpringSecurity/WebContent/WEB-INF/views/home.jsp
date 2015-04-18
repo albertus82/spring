@@ -17,17 +17,5 @@
 				Utente ${sessionScope.utente.nome}: sei in sessione!
 			</h2>
 		</c:if>
-		
-		<ul>
-			<c:forEach items="${lista}" var="elemento">
-				<li>${elemento}</li>
-			</c:forEach>
-		</ul>
-		
-		<ul>
-			<c:forEach items="${stuff}" var="elemento">
-				<li>${elemento}</li>
-			</c:forEach>
-		</ul>
 	</body>
 </html>
