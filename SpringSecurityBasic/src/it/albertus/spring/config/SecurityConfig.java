@@ -1,7 +1,5 @@
 package it.albertus.spring.config;
 
-import it.albertus.spring.service.UtenteService;
-
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,23 +28,16 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
-	private static final String QUERY_AUTENTICAZIONE = "SELECT username, password, 1 FROM utenti WHERE username = ?";
-	private static final String QUERY_RUOLI = "SELECT username, 'ROLE_USER' FROM utenti WHERE username = ?";
-	private static final String QUERY_GRUPPI = "SELECT NULL, NULL, NULL FROM utenti WHERE username = ?";
-
 	/**
 	 * Per permettere a Spring Security di accedere al database e recuperare le
-	 * credenziali.
+	 * credenziali degli utenti.
 	 */
 	@Autowired
 	private DataSource dataSource;
 	
-	/**
-	 * Per caricare tutti i dati dell'utente, non solo quelli previsti da Spring
-	 * Security.
-	 */
-	@Autowired
-	private UtenteService utenteService;
+	private static final String QUERY_AUTENTICAZIONE = "SELECT username, password, 1 FROM utenti WHERE username = ?";
+	private static final String QUERY_RUOLI = "SELECT username, 'ROLE_USER' FROM utenti WHERE username = ?";
+	private static final String QUERY_GRUPPI = "SELECT NULL, NULL, NULL FROM utenti WHERE username = ?";
 	
 	/**
 	 * Query di default di Spring Security (da sovrascrivere se necessario):
@@ -69,9 +60,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		securityConfigurer.usersByUsernameQuery(QUERY_AUTENTICAZIONE);
 		securityConfigurer.authoritiesByUsernameQuery(QUERY_RUOLI);
 		securityConfigurer.groupAuthoritiesByUsername(QUERY_GRUPPI);
-		
-		// Caricamento personalizzato dei dati dell'utente...
-//		auth.userDetailsService(utenteService);
 	}
 	
 	@Override

@@ -1,16 +1,13 @@
 package it.albertus.spring.model;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
-public class Utente implements Serializable, UserDetails {
+public class Utente implements Serializable {
 
-	private static final long serialVersionUID = -2469030823598758896L;
+	private static final long serialVersionUID = -2469030823498758896L;
 
 	private String nome;
 	private String cognome;
@@ -58,31 +55,6 @@ public class Utente implements Serializable, UserDetails {
 
 	public void setDataNascita(Date dataNascita) {
 		this.dataNascita = dataNascita;
-	}
-
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return null;
-	}
-
-	@Override
-	public boolean isAccountNonExpired() {
-		return true;
-	}
-
-	@Override
-	public boolean isAccountNonLocked() {
-		return true;
-	}
-
-	@Override
-	public boolean isCredentialsNonExpired() {
-		return true;
-	}
-
-	@Override
-	public boolean isEnabled() {
-		return true;
 	}
 
 }

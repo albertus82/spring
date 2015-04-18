@@ -7,7 +7,6 @@ import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,12 +32,8 @@ public class UtenteServiceImpl implements UtenteService {
 	}
 
 	@Override
-	public Utente loadUserByUsername(String username) throws UsernameNotFoundException {
-		Utente utente = utenteDao.findById(username);
-		if (utente == null) {
-			throw new UsernameNotFoundException("Utente non presente o problema di connessione al database.");
-		}
-		return utente;
+	public Utente findById(String username) {
+		return utenteDao.findById(username);
 	}
 
 }
