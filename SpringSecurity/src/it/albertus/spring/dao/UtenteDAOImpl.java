@@ -34,22 +34,20 @@ public class UtenteDAOImpl extends BaseDAO implements UtenteDAO {
 		paramMap.addValue("cgm", model.getCognome(), Types.VARCHAR);
 		paramMap.addValue("dn", model.getDataNascita(), Types.DATE);
 		jdbcOperations.update(insert, paramMap);
-//		throw new IllegalArgumentException("ERRORE IMPREVISTO!");
 	}
 
 	@Override
-	public Utente auth(final String username, final String password) {
+	public Utente findById(final String username) {
 		Utente utente;
 
-		String query = "SELECT u.username, u.password, u.nome, u.cognome, u.data_nascita FROM utenti u WHERE u.username = :usn AND u.password = :pwd";
+		String query = "SELECT u.username, u.password, u.nome, u.cognome, u.data_nascita FROM utenti u WHERE u.username = :usn";
 		try {
 			MapSqlParameterSource paramMap = new MapSqlParameterSource();
 			paramMap.addValue("usn", username, Types.VARCHAR);
-			paramMap.addValue("pwd", password, Types.VARCHAR);
 			utente = jdbcOperations.queryForObject(query, paramMap, new UtenteRowMapper());
 		}
 		catch (EmptyResultDataAccessException e) {
-			log.info("Autenticazione fallita perche' l'utente non esiste oppure la password e' errata.");
+			log.info("Autenticazione fallita perche' l'utente non esiste.");
 			utente = null;
 		}
 		catch (Exception e) {

@@ -9,13 +9,7 @@
 	</head>
 	<body>
 		<h1>
-			Benvenuto ${utente.nome}!
+			Benvenuto ${username}!
 		</h1>
-		
-		<c:if test="${not empty sessionScope.utente}">
-			<h2>
-				Utente ${sessionScope.utente.nome}: sei in sessione!
-			</h2>
-		</c:if>
 	</body>
 </html>

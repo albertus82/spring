@@ -2,10 +2,12 @@ package it.albertus.spring.service;
 
 import it.albertus.spring.model.Utente;
 
-public interface UtenteService {
+import org.springframework.security.core.userdetails.UserDetailsService;
+
+public interface UtenteService extends UserDetailsService {
 
 	void save(Utente model);
 	
-	Utente auth(String username, String password);
+	Utente loadUserByUsername(String username);
 	
 }

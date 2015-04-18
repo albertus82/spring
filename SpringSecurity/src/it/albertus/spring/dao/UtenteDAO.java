@@ -6,6 +6,6 @@ public interface UtenteDAO {
 
 	void save(Utente model);
 
-	Utente auth(String username, String password);
+	Utente findById(String username);
 
 }

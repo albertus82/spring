@@ -1,5 +1,7 @@
 package it.albertus.spring.config;
 
+import it.albertus.spring.service.UtenteService;
+
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,8 +34,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	private static final String QUERY_RUOLI = "SELECT username, 'ROLE_USER' FROM utenti WHERE username = ?";
 	private static final String QUERY_GRUPPI = "SELECT NULL, NULL, NULL FROM utenti WHERE username = ?";
 
+	/**
+	 * Per permettere a Spring Security di accedere al database e recuperare le
+	 * credenziali.
+	 */
 	@Autowired
-	DataSource dataSource; // Per accedere al database e recuperare le credenziali.
+	private DataSource dataSource;
+	
+	/**
+	 * Per caricare tutti i dati dell'utente, non solo quelli previsti da Spring
+	 * Security.
+	 */
+	@Autowired
+	private UtenteService utenteService;
 	
 	/**
 	 * Query di default di Spring Security (da sovrascrivere se necessario):
@@ -50,16 +63,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		JdbcUserDetailsManagerConfigurer<AuthenticationManagerBuilder> securityConfigurer = auth.jdbcAuthentication();
+		
+		// Personalizzazione delle query di autenticazione e autorizzazione...
 		securityConfigurer.dataSource(dataSource);
 		securityConfigurer.usersByUsernameQuery(QUERY_AUTENTICAZIONE);
 		securityConfigurer.authoritiesByUsernameQuery(QUERY_RUOLI);
 		securityConfigurer.groupAuthoritiesByUsername(QUERY_GRUPPI);
+		
+		// Caricamento personalizzato dei dati dell'utente...
+//		auth.userDetailsService(utenteService);
 	}
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests().anyRequest().authenticated();
+		
+		// Configurazione della pagina di login personalizzata...
 		http.formLogin().loginPage("/customlogin").permitAll();
+		
 		http.httpBasic();
 	}
 
