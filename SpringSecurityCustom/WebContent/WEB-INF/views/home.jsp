@@ -9,7 +9,7 @@
 	</head>
 	<body>
 		<h1>
-			Benvenuto ${username}!
+			Benvenuto ${utente.nome} ${utente.cognome}!
 		</h1>
 	</body>
 </html>

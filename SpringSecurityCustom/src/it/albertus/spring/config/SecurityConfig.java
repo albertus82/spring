@@ -7,7 +7,6 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.authentication.configurers.provisioning.JdbcUserDetailsManagerConfigurer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -30,10 +29,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
-	private static final String QUERY_AUTENTICAZIONE = "SELECT username, password, 1 FROM utenti WHERE username = ?";
-	private static final String QUERY_RUOLI = "SELECT username, 'ROLE_USER' FROM utenti WHERE username = ?";
-	private static final String QUERY_GRUPPI = "SELECT NULL, NULL, NULL FROM utenti WHERE username = ?";
-
 	/**
 	 * Per permettere a Spring Security di accedere al database e recuperare le
 	 * credenziali.
@@ -48,30 +43,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private UtenteService utenteService;
 	
-	/**
-	 * Query di default di Spring Security (da sovrascrivere se necessario):
-	 * 
-	 * public static final String DEF_USERS_BY_USERNAME_QUERY =
-	 * "select username,password,enabled from users where username = ?";
-	 * 
-	 * public static final String DEF_AUTHORITIES_BY_USERNAME_QUERY =
-	 * "select username,authority from authorities where username = ?";
-	 * 
-	 * public static final String DEF_GROUP_AUTHORITIES_BY_USERNAME_QUERY =
-	 * "select g.id, g.group_name, ga.authority from groups g, group_members gm, group_authorities ga where gm.username = ? and g.id = ga.group_id and g.id = gm.group_id";
-	 */
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		JdbcUserDetailsManagerConfigurer<AuthenticationManagerBuilder> securityConfigurer = auth.jdbcAuthentication();
-		
-		// Personalizzazione delle query di autenticazione e autorizzazione...
-		securityConfigurer.dataSource(dataSource);
-		securityConfigurer.usersByUsernameQuery(QUERY_AUTENTICAZIONE);
-		securityConfigurer.authoritiesByUsernameQuery(QUERY_RUOLI);
-		securityConfigurer.groupAuthoritiesByUsername(QUERY_GRUPPI);
-		
 		// Caricamento personalizzato dei dati dell'utente...
-//		auth.userDetailsService(utenteService);
+		auth.userDetailsService(utenteService);
 	}
 	
 	@Override
