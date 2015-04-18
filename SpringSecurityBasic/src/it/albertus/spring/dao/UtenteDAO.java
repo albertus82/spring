@@ -6,6 +6,4 @@ public interface UtenteDAO {
 
 	void save(Utente model);
 
-	Utente findById(String username);
-
 }
