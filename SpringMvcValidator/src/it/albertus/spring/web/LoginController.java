@@ -26,7 +26,7 @@ public class LoginController {
 	@RequestMapping(value = { "/login" }, method = RequestMethod.POST)
 	public String login(Utente utente, HttpServletRequest request, HttpSession session, Model model) {
 		String forward;
-		Utente autenticato = null;
+		Utente autenticato = null; // TODO Chiamata al servizio di autenticazione...
 		if (autenticato == null) {
 			request.setAttribute("messaggio", "Utenza non valida!");
 			forward = login();
