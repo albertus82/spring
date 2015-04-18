@@ -1,4 +1,4 @@
-package it.albertus.spring.config;
+package it.albertus.spring.config.security;
 
 import it.albertus.spring.service.UtenteService;
 

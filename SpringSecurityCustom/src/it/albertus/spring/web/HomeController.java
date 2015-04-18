@@ -24,8 +24,9 @@ public class HomeController {
 
 	@RequestMapping(value = { "/home" }, method = RequestMethod.GET)
 	public String home(@AuthenticationPrincipal Utente utente, HttpSession session, ModelMap map) {
-		log.info("Utente autenticato: " + utente.getUsername() + '(' + utente.getNome() + ' ' + utente.getCognome() + ')');
+		log.info("Utente autenticato: " + utente.getUsername() + " (" + utente.getNome() + ' ' + utente.getCognome() + ')');
 		session.setAttribute("utente", utente);
 		return "home";
 	}
+
 }
