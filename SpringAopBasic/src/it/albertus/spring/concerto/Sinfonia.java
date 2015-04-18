@@ -7,7 +7,7 @@ public class Sinfonia implements Esecuzione {
 
 	@Override
 	public void esegui() {
-		System.out.println(getClass().getName() + " - " + "TATATATAAAAAA - TATATATAAAAAAAAAAAA.");
+		System.out.println(getClass().getSimpleName() + " - " + "TATATATAAAAAA - TATATATAAAAAAAAAAAA.");
 	}
 
 }
