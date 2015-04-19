@@ -20,7 +20,7 @@
 		<!-- Eventuali errori -->
 		<sf:errors path="utente.*" element="div" cssStyle="color:red; text-align:center; margin:1em;" />
 		
-		<sf:form commandName="utente" action="register" method="POST">
+		<sf:form modelAttribute="utente" action="register" method="POST"> <%-- l'attributo "modelAttribute" equivale a "commandName" --%>
 			<table style="margin: auto;" cellpadding="4">
 				<tr>
 					<td>Username</td>
