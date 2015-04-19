@@ -16,27 +16,27 @@
 			<div style="color:red; text-align:center; margin:1em;"><strong>${requestScope.messaggio}</strong></div>
 		</c:if>
 		
-		<form action="register" method="POST">
+		<form:form commandName="utente" action="register" method="POST">
 			<table style="margin: auto;" cellpadding="4">
 				<tr>
 					<td>Username</td>
-					<td><input type="text" name="username" /></td>
+					<td><form:input type="text" path="username" /></td>
 				</tr>
 				<tr>
 					<td>Password</td>
-					<td><input type="text" name="password" /></td>
+					<td><form:input type="text" path="password" /></td>
 				</tr>
 				<tr>
 					<td>Nome</td>
-					<td><input type="text" name="nome" /></td>
+					<td><form:input type="text" path="nome" /></td>
 				</tr>
 				<tr>
 					<td>Cognome</td>
-					<td><input type="text" name="cognome" /></td>
+					<td><form:input type="text" path="cognome" /></td>
 				</tr>
 				<tr>
 					<td>Data di nascita</td>
-					<td><input type="text" name="dataNascita" /></td>
+					<td><form:input type="text" path="dataNascita" /></td>
 				</tr>
 				<tr>
 					<td colspan="2" style="text-align: center;">
@@ -44,7 +44,7 @@
 					</td>
 				</tr>
 			</table>
-		</form>
+		</form:form>
 		
 	</body>
 </html>

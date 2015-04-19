@@ -18,7 +18,7 @@
 		</c:if>
 		
 		<!-- Eventuali errori -->
-		<sf:errors path="utente.*" element="div" cssStyle="color:red; text-align:center;  margin:1em;" />
+		<sf:errors path="utente.*" element="div" cssStyle="color:red; text-align:center; margin:1em;" />
 		
 		<%-- Gestione manuale degli errori (scomoda ma possibile)
 		<c:if test="${not empty requestScope.errori}">
