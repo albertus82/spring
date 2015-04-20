@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -29,6 +30,7 @@ public class Utente implements Serializable {
 	private transient String password;
 	
 	@DateTimeFormat(pattern="dd/MM/yyyy")
+	@Past
 	private Date dataNascita;
 
 
