@@ -19,7 +19,7 @@
 		</c:if>
 		
 		<ul>
-			<c:forEach items="${lista}" var="elemento">
+			<c:forEach items="${lista}" var="elemento"> <%-- "lista" e' il ModelAttribute --%>
 				<li>${elemento.nome} ${elemento.cognome}</li>
 			</c:forEach>
 		</ul>

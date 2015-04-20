@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class HomeController {
 	
-	@ModelAttribute("lista")
+	@ModelAttribute("lista") // Questo alias sara' usato nella JSP!
 	private List<Utente> getUtentiPredefiniti() {
 		List<Utente> utenti = new ArrayList<Utente>();
 		
