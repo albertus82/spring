@@ -20,7 +20,7 @@ public class Main {
 		// Si deve utilizzare l'interfaccia, perche' l'implementazione in realta' e' un proxy!
 		Esecuzione s = (Esecuzione) context.getBean("sinfonia");
 		try {
-			s.esegui();
+			s.esegui("Quinta di Beethoven");
 		}
 		catch (StonaturaException se) {}
 	}

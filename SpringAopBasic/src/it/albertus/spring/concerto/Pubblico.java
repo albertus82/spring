@@ -25,11 +25,11 @@ public class Pubblico {
 		System.out.println(getClass().getSimpleName() + " - " + "Prende posto...");
 	}
 
-	@After("esecuzione()")
-	public void exitAll() {
-		System.out.println(getClass().getSimpleName() + " - " + "Valuta la qualit\u00E0 dell'esecuzione...");
+	@After(value = "esecuzione() && args(opera)")
+	public void exitAll(String opera) {
+		System.out.println(getClass().getSimpleName() + " - " + "Valuta la qualit\u00E0 dell'esecuzione di \"" + opera + "\"...");
 	}
-	
+
 	@AfterReturning(value = "esecuzione()", returning = "durata")
 	public void applause(int durata) {
 		System.out.println(getClass().getSimpleName() + " - " + "CLAP CLAP CLAP!!! (L'esecuzione \u00E8 durata " + durata + " minuti).");

@@ -6,8 +6,8 @@ import org.springframework.stereotype.Component;
 public class Sinfonia implements Esecuzione {
 
 	@Override
-	public int esegui() {
-		System.out.println(getClass().getSimpleName() + " - " + "TATATATAAAAAA - TATATATAAAAAAAAAAAA...");
+	public int esegui(String opera) {
+		System.out.println(getClass().getSimpleName() + " - " + opera + ": TATATATAAAAAA - TATATATAAAAAAAAAAAA...");
 		if (Math.random() < 0.5D) {
 			System.out.println(getClass().getSimpleName() + " - Stonatura...");
 			throw new StonaturaException();
