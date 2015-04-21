@@ -26,7 +26,7 @@ public class Pubblico {
 	}
 
 	@After(value = "esecuzione() && args(opera)")
-	public void exitAll(String opera) {
+	public void exitAll(String opera) { // Il tipo del parametro deve corrispondere a quello del parametro del metodo "esegui"!
 		System.out.println(getClass().getSimpleName() + " - " + "Valuta la qualit\u00E0 dell'esecuzione di \"" + opera + "\"...");
 	}
 
