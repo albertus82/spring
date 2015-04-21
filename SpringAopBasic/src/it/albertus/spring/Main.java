@@ -1,6 +1,7 @@
 package it.albertus.spring;
 
 import it.albertus.spring.concerto.Esecuzione;
+import it.albertus.spring.concerto.StonaturaException;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -18,7 +19,10 @@ public class Main {
 
 		// Si deve utilizzare l'interfaccia, perche' l'implementazione in realta' e' un proxy!
 		Esecuzione s = (Esecuzione) context.getBean("sinfonia");
-		s.esegui();
+		try {
+			s.esegui();
+		}
+		catch (StonaturaException se) {}
 	}
 
 }

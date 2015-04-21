@@ -2,6 +2,6 @@ package it.albertus.spring.concerto;
 
 public interface Esecuzione {
 
-	public void esegui();
+	public int esegui();
 	
 }

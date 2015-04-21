@@ -30,14 +30,14 @@ public class Pubblico {
 		System.out.println(getClass().getSimpleName() + " - " + "Valuta la qualit\u00E0 dell'esecuzione...");
 	}
 	
-	@AfterReturning("esecuzione()")
-	public void applause() {
-		System.out.println(getClass().getSimpleName() + " - " + "Applaude!!!");
+	@AfterReturning(value = "esecuzione()", returning = "durata")
+	public void applause(int durata) {
+		System.out.println(getClass().getSimpleName() + " - " + "CLAP CLAP CLAP!!! (L'esecuzione \u00E8 durata " + durata + " minuti).");
 	}
 
-	@AfterThrowing("esecuzione()")
-	public void demandRefund() {
-		System.out.println(getClass().getSimpleName() + " - " + "Richiede rimborso.");
+	@AfterThrowing(value = "esecuzione()", throwing = "eccezione")
+	public void demandRefund(Throwable eccezione) {
+		System.out.println(getClass().getSimpleName() + " - " + "BUUU!!! RIDATECI I SOLDI! (" + eccezione.getClass().getSimpleName() + ')');
 	}
 
 }
