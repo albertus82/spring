@@ -9,17 +9,16 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 @Configuration
-@ComponentScan(basePackages="it.albertus.spring")
+@ComponentScan(basePackages = "it.albertus.spring")
 @EnableAspectJAutoProxy
 public class Main {
-	
-	public static void main(String args[]) {
-		
-//		ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+
+	public static final void main(String args[]) {
 		ApplicationContext context = new AnnotationConfigApplicationContext(Main.class);
-		
+
 		// Si deve utilizzare l'interfaccia, perche' l'implementazione in realta' e' un proxy!
-		Esecuzione s = (Esecuzione) context.getBean( "sinfonia" );
+		Esecuzione s = (Esecuzione) context.getBean("sinfonia");
 		s.esegui();
-	}	
+	}
+
 }

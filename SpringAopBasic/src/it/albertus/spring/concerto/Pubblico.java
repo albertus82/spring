@@ -7,7 +7,7 @@ import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 
-@Component
+@Component // Deve essere un bean gestito da Spring!
 @Aspect
 public class Pubblico {
 	
@@ -16,21 +16,21 @@ public class Pubblico {
 
 	@Before("esecuzione()")
 	public void silenceCellPhones() {
-		System.out.println(getClass().getSimpleName() + " - " + "Spegne telefoni cellulari");
+		System.out.println(getClass().getSimpleName() + " - " + "Spegne telefoni cellulari...");
 	}
 
 	@Before("esecuzione()")
 	public void takeSeats() {
-		System.out.println(getClass().getSimpleName() + " - " + "Prende posto");
+		System.out.println(getClass().getSimpleName() + " - " + "Prende posto...");
 	}
 
 	@AfterReturning("esecuzione()")
 	public void applause() {
-		System.out.println(getClass().getSimpleName() + " - " + "Applausi!!!");
+		System.out.println(getClass().getSimpleName() + " - " + "Applaude!!!");
 	}
 
 	@AfterThrowing("esecuzione()")
 	public void demandRefund() {
-		System.out.println(getClass().getSimpleName() + " - " + "Richiede rimborso");
+		System.out.println(getClass().getSimpleName() + " - " + "Richiede rimborso.");
 	}
 }
