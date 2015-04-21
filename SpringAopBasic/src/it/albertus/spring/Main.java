@@ -1,6 +1,6 @@
 package it.albertus.spring;
 
-import it.albertus.spring.concerto.Esecuzione;
+import it.albertus.spring.concerto.Interprete;
 import it.albertus.spring.concerto.StonaturaException;
 
 import org.springframework.context.ApplicationContext;
@@ -17,8 +17,9 @@ public class Main {
 	public static final void main(String args[]) {
 		ApplicationContext context = new AnnotationConfigApplicationContext(Main.class);
 
-		// Si deve utilizzare l'interfaccia, perche' l'implementazione in realta' e' un proxy!
-		Esecuzione s = (Esecuzione) context.getBean("sinfonia");
+		// Ci si deve riferire all'interfaccia, perche' l'implementazione in realta' e' un proxy!
+		Interprete s = context.getBean(Interprete.class);
+		
 		try {
 			s.esegui("Quinta di Beethoven");
 		}

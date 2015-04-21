@@ -3,7 +3,7 @@ package it.albertus.spring.concerto;
 import org.springframework.stereotype.Component;
 
 @Component
-public class Sinfonia implements Esecuzione {
+public class Orchestra implements Interprete {
 
 	@Override
 	public int esegui(String opera) {
