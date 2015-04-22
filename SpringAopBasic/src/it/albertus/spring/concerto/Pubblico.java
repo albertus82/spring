@@ -15,7 +15,7 @@ public class Pubblico {
 	@Pointcut("execution(** it.albertus.spring.concerto.Interprete.esegui(..))") // Si puo' specificare sia Interprete che Orchestra.
 	private void esecuzione() {}; // Marcatore
 
-	@Before("esecuzione()")
+	@Before("@within(org.springframework.stereotype.Service) && execution(** it.albertus.spring.concerto.Interprete.esegui(..))")
 	public void silenceCellPhones() {
 		System.out.println(getClass().getSimpleName() + " - " + "Spegne telefoni cellulari...");
 	}

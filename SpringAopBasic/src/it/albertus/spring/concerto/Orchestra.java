@@ -12,7 +12,7 @@ public class Orchestra implements Interprete {
 			System.out.println(getClass().getSimpleName() + " - Stonatura!");
 			throw new StonaturaException();
 		}
-		return 60;
+		return 30;
 	}
 
 }

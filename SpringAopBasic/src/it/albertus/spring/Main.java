@@ -1,6 +1,7 @@
 package it.albertus.spring;
 
-import it.albertus.spring.concerto.Interprete;
+import it.albertus.spring.concerto.Orchestra;
+import it.albertus.spring.concerto.Pianista;
 import it.albertus.spring.concerto.StonaturaException;
 
 import org.springframework.context.ApplicationContext;
@@ -17,13 +18,18 @@ public class Main {
 	public static final void main(String args[]) {
 		ApplicationContext context = new AnnotationConfigApplicationContext(Main.class);
 
-		// Ci si deve riferire all'interfaccia, perche' l'implementazione in realta' e' un proxy!
-		Interprete chicagoSymphonyOrchestra = context.getBean(Interprete.class);
-
+		// Ochestra
+		Orchestra chicagoSymphonyOrchestra = context.getBean("orchestra", Orchestra.class);
 		try {
 			chicagoSymphonyOrchestra.esegui("Quinta di Beethoven");
 		}
 		catch (StonaturaException se) {}
+		
+		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		
+		// Pianista
+		Pianista maurizioPollini = context.getBean("pianista", Pianista.class);
+		maurizioPollini.esegui("Sonata 'Hammerklavier' di Beethoven");
 	}
 
 }
