@@ -2,7 +2,8 @@ package it.albertus.spring.config;
 
 import javax.sql.DataSource;
 
-import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.context.annotation.AdviceMode;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ComponentScan.Filter;
@@ -20,7 +21,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 	excludeFilters = {
 		@Filter(type = FilterType.ANNOTATION, value = EnableWebMvc.class)
 	})
-@EnableTransactionManagement // Abilita l'AOP per la gestione delle transazioni.
+@EnableTransactionManagement(proxyTargetClass=true, mode=AdviceMode.PROXY) // Abilita l'AOP per la gestione delle transazioni. I parametri aggiuntivi sono facoltativi.
 public class RootConfig {
 	
 	/** Gestisce la connessione al database. */
@@ -46,7 +47,7 @@ public class RootConfig {
 	 * @Transactional quale si vuole usare, pena "NoUniqueBeanDefinitionException".
 	 */
 	@Bean
-	@Scope(ConfigurableBeanFactory.SCOPE_SINGLETON) // E' il valore di default.
+	@Scope(BeanDefinition.SCOPE_SINGLETON) // E' il valore di default.
 	protected DataSourceTransactionManager transactionManager(DataSource dataSource) {
 		return new DataSourceTransactionManager(dataSource);
 	}
