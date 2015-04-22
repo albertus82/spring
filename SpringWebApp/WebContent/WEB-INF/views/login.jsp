@@ -9,6 +9,11 @@
 		<title>Pagina di accesso</title>
 	</head>
 	<body style="font-family: verdana, sans-serif;">
+	
+		<div style="text-align:center;">
+			<img src="img/spring-logo.png" style="width:20%; height:20%;" />
+		</div>
+		
 		<h1 style="text-align: center;">Accesso</h1>
 	
 		<!-- Eventuale messaggio -->
