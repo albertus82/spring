@@ -5,11 +5,15 @@ import it.albertus.spring.model.Utente;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
 @Controller
 public class HomeController {
@@ -31,7 +35,12 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = { "/{nome}" }, method = RequestMethod.GET)
-	public String home(@PathVariable("nome") String name, ModelMap map) {
+	public String home(@PathVariable("nome") String name, ModelMap map, HttpServletRequest request) {
+		
+		// Esempio di recupero del context dall'interno di un controller...
+		WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(request.getServletContext());
+		System.out.println(context.toString());
+		
 		Utente utente = new Utente();
 		utente.setNome(name);
 		map.addAttribute("utente", utente);
