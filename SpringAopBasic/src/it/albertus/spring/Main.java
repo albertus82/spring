@@ -11,17 +11,17 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 @Configuration
 @ComponentScan(basePackages = "it.albertus.spring")
-@EnableAspectJAutoProxy
+@EnableAspectJAutoProxy(proxyTargetClass = true) // Forzo CGLIB!
 public class Main {
 
 	public static final void main(String args[]) {
 		ApplicationContext context = new AnnotationConfigApplicationContext(Main.class);
 
 		// Ci si deve riferire all'interfaccia, perche' l'implementazione in realta' e' un proxy!
-		Interprete s = context.getBean(Interprete.class);
-		
+		Interprete chicagoSymphonyOrchestra = context.getBean(Interprete.class);
+
 		try {
-			s.esegui("Quinta di Beethoven");
+			chicagoSymphonyOrchestra.esegui("Quinta di Beethoven");
 		}
 		catch (StonaturaException se) {}
 	}
