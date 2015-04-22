@@ -9,7 +9,7 @@ public class Orchestra implements Interprete {
 	public int esegui(String opera) {
 		System.out.println(getClass().getSimpleName() + " - " + opera + ": TATATATAAAAAA - TATATATAAAAAAAAAAAA...");
 		if (Math.random() < 0.5D) {
-			System.out.println(getClass().getSimpleName() + " - Stonatura...");
+			System.out.println(getClass().getSimpleName() + " - Stonatura!");
 			throw new StonaturaException();
 		}
 		return 60;
