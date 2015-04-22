@@ -1,7 +1,17 @@
 package it.albertus.spring.concerto;
 
-public interface Interprete {
+public abstract class Interprete {
+	
+	private String nome;
 
-	public int esegui(String opera);
+	public abstract int esegui(String opera);
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 	
 }
