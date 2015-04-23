@@ -18,7 +18,7 @@ public class Main {
 	public static final void main(String args[]) {
 		ApplicationContext context = new AnnotationConfigApplicationContext(Main.class);
 
-		// Ochestra
+		// Orchestra
 		Orchestra chicagoSymphonyOrchestra = context.getBean("orchestra", Orchestra.class);
 		try {
 			chicagoSymphonyOrchestra.esegui("Quinta di Beethoven");
