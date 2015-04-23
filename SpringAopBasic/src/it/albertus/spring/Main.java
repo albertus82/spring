@@ -29,7 +29,7 @@ public class Main {
 		
 		// Pianista
 		Pianista maurizioPollini = context.getBean("pianista", Pianista.class);
-		maurizioPollini.esegui("Sonata 'Hammerklavier' di Beethoven");
+		maurizioPollini.esegui("Sonata 'Chiaro di luna' di Beethoven");
 	}
 
 }
