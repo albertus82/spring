@@ -5,11 +5,11 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-		<title>Pagina di errore</title>
+		<title>Operazione completata</title>
 	</head>
 	<body>
 		<h1>
-			Si &egrave; verificato un errore nel ${param.page}.
+			Operazione completata.
 		</h1>
 	</body>
 </html>

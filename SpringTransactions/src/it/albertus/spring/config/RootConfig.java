@@ -2,14 +2,12 @@ package it.albertus.spring.config;
 
 import javax.sql.DataSource;
 
-import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.AdviceMode;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ComponentScan.Filter;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
-import org.springframework.context.annotation.Scope;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -47,7 +45,6 @@ public class RootConfig {
 	 * @Transactional quale si vuole usare, pena "NoUniqueBeanDefinitionException".
 	 */
 	@Bean
-	@Scope(BeanDefinition.SCOPE_SINGLETON) // E' il valore di default.
 	protected DataSourceTransactionManager transactionManager(DataSource dataSource) {
 		return new DataSourceTransactionManager(dataSource);
 	}
