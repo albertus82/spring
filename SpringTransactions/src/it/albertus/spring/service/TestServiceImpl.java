@@ -26,11 +26,11 @@ public class TestServiceImpl implements TestService {
 	}
 
 	@Override
-	@Transactional(propagation = Propagation.REQUIRED, noRollbackFor=IllegalArgumentException.class) // Non eredita nulla dall'annotation sulla classe!
+	@Transactional(propagation = Propagation.REQUIRED) // Non eredita nulla dall'annotation sulla classe!
 	public void rollback() {
 		insert();
-//		if (true)
-//			throw new IllegalStateException();
+		log.info("Prima dell'eccezione nel service...");
+		throw new IllegalStateException();
 	}
 
 }
