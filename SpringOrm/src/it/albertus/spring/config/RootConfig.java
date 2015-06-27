@@ -4,6 +4,7 @@ import java.util.Properties;
 
 import javax.sql.DataSource;
 
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -12,8 +13,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.context.annotation.Scope;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -50,8 +51,8 @@ public class RootConfig {
 	 */
 	@Bean
 	@Scope(ConfigurableBeanFactory.SCOPE_SINGLETON) // E' il valore di default.
-	protected DataSourceTransactionManager transactionManager(DataSource dataSource) {
-		return new DataSourceTransactionManager(dataSource);
+	protected HibernateTransactionManager transactionManager(SessionFactory sessionFactory) {
+		return new HibernateTransactionManager(sessionFactory);
 	}
 	
 	/** Integrazione con Hibernate */
