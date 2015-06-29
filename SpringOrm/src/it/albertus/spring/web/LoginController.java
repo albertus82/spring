@@ -39,7 +39,7 @@ public class LoginController {
 		else {
 			utente = autenticato;
 			session.setAttribute("utente", utente);
-			forward = "redirect:home";
+			forward = "redirect:home/" + utente.getNome();
 		}
 		return forward;
 	}
