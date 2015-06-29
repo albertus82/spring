@@ -1,21 +1,17 @@
 package it.albertus.spring.config;
 
-import java.util.Properties;
-
+import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ComponentScan.Filter;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
-import org.springframework.context.annotation.Scope;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.orm.hibernate4.HibernateTransactionManager;
-import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
+import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.orm.jpa.LocalEntityManagerFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
@@ -50,22 +46,16 @@ public class RootConfig {
 	 * @Transactional quale si vuole usare, pena "NoUniqueBeanDefinitionException".
 	 */
 	@Bean
-	@Scope(ConfigurableBeanFactory.SCOPE_SINGLETON) // E' il valore di default.
-	protected HibernateTransactionManager transactionManager(SessionFactory sessionFactory) {
-		return new HibernateTransactionManager(sessionFactory);
+	protected JpaTransactionManager transactionManager(EntityManagerFactory emf) {
+		return new JpaTransactionManager(emf);
 	}
 	
 	/** Integrazione con Hibernate */
 	@Bean
-	public LocalSessionFactoryBean sessionFactory(DataSource dataSource) {
-		LocalSessionFactoryBean sfb = new LocalSessionFactoryBean();
-		sfb.setDataSource(dataSource);
-		sfb.setPackagesToScan(new String[] { "it.albertus.spring.model" });
-		Properties props = new Properties();
-		props.setProperty("hibernate.dialect", "org.hibernate.dialect.Oracle10gDialect");
-		props.setProperty("hibernate.show_sql", Boolean.TRUE.toString());
-		sfb.setHibernateProperties(props);
-		return sfb;
+	public LocalEntityManagerFactoryBean entityManagerFactory() {
+		LocalEntityManagerFactoryBean emfb = new LocalEntityManagerFactoryBean();
+		emfb.setPersistenceUnitName("jpa_test");
+		return emfb;
 	}
 	
 }

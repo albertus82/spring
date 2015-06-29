@@ -8,6 +8,7 @@ import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.Criteria;
+import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -40,7 +41,7 @@ public class UtenteDAOImpl extends BaseDAO implements UtenteDAO {
 		Utente utente;
 
 		try {
-			Criteria crit = getSession().createCriteria(Utente.class);
+			Criteria crit = getEntityManager().unwrap(Session.class).createCriteria(Utente.class);
 			crit.add(Restrictions.eq("username", username));
 			crit.add(Restrictions.eq("password", password));
 			utente = (Utente) crit.uniqueResult();
