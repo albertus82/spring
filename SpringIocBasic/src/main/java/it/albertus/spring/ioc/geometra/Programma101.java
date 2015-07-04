@@ -11,10 +11,10 @@ public class Programma101 extends Calcolatrice {
 	private static final String RUMORE = '/' + Programma101.class.getPackage().getName().replace('.', '/') + "/p101_22k_8b.wav";
 
 	@Override
-	public double somma(double a, double b) {
+	public double addizione(double a, double b) {
 		soundPlayer.play(this.getClass().getResourceAsStream(RUMORE));
 		ThreadUtils.sleep(ATTESA);
-		return super.somma(a, b);
+		return super.addizione(a, b);
 	}
 
 	@Override

@@ -12,10 +12,10 @@ public class Multisumma24 extends Calcolatrice {
 	private static final String RUMORE = '/' + Multisumma24.class.getPackage().getName().replace('.', '/') + "/ms24_22k_8b.wav";
 
 	@Override
-	public double somma(double a, double b) {
+	public double addizione(double a, double b) {
 		soundPlayer.play(this.getClass().getResourceAsStream(RUMORE));
 		ThreadUtils.sleep(ATTESA);
-		return super.somma(a, b);
+		return super.addizione(a, b);
 	}
 
 	@Override

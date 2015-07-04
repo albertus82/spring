@@ -9,7 +9,7 @@ public abstract class Calcolatrice {
 	@Autowired
 	protected SoundPlayer soundPlayer;
 
-	public double somma(double a, double b) {
+	public double addizione(double a, double b) {
 		return a + b;
 	}
 
