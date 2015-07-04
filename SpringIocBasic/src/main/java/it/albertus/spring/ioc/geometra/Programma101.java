@@ -38,4 +38,10 @@ public class Programma101 extends Calcolatrice {
 		return super.divisione(a, b);
 	}
 
+	public double radiceQuadrata(double operando) {
+		soundPlayer.play(this.getClass().getResourceAsStream(RUMORE));
+		ThreadUtils.sleep(ATTESA);
+		return Math.sqrt(operando);
+	}
+
 }

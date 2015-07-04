@@ -14,17 +14,25 @@ import org.springframework.stereotype.Component;
 public class SoundPlayer {
 
 	public void play(InputStream waveInputStream) {
+		AudioInputStream stream = null;
 		try {
-			AudioInputStream stream = AudioSystem.getAudioInputStream(waveInputStream);
+			stream = AudioSystem.getAudioInputStream(waveInputStream);
 			AudioFormat format = stream.getFormat();
 			Info info = new Info(Clip.class, format);
 			Clip clip = (Clip) AudioSystem.getLine(info);
 			clip.open(stream);
 			clip.start();
-			stream.close();
 		}
 		catch (Exception e) {
 			e.printStackTrace();
+		}
+		finally {
+			try {
+				stream.close();
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
 

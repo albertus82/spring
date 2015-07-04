@@ -15,32 +15,26 @@ public class Multisumma24 extends Calcolatrice {
 	public double somma(double a, double b) {
 		soundPlayer.play(this.getClass().getResourceAsStream(RUMORE));
 		ThreadUtils.sleep(ATTESA);
-		double risultato = super.somma(a, b);
-		System.out.println(risultato);
-		return risultato;
+		return super.somma(a, b);
 	}
 
 	@Override
 	public double sottrazione(double a, double b) {
 		soundPlayer.play(this.getClass().getResourceAsStream(RUMORE));
 		ThreadUtils.sleep(ATTESA);
-		double risultato = super.sottrazione(a, b);
-		System.out.println(risultato);
-		return risultato;
+		return super.sottrazione(a, b);
 	}
 
 	@Override
 	public double moltiplicazione(double a, double b) {
 		soundPlayer.play(this.getClass().getResourceAsStream(RUMORE));
 		ThreadUtils.sleep(ATTESA);
-		double risultato = super.moltiplicazione(a, b);
-		System.out.println(risultato);
-		return risultato;
+		return super.moltiplicazione(a, b);
 	}
 
 	@Override
 	public double divisione(double a, double b) {
-		throw new UnsupportedOperationException();
+		throw new UnsupportedOperationException("Operazione non disponibile sulla Olivetti Multisumma 24.");
 	}
 
 }
