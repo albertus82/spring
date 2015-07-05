@@ -44,4 +44,9 @@ public class Programma101 extends Calcolatrice {
 		return Math.sqrt(operando);
 	}
 
+	@Override
+	public String toString() {
+		return "Programma 101";
+	}
+
 }

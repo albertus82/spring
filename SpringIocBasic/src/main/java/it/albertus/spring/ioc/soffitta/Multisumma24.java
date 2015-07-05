@@ -37,4 +37,9 @@ public class Multisumma24 extends Calcolatrice {
 		throw new UnsupportedOperationException("Operazione non disponibile sulla Olivetti Multisumma 24.");
 	}
 
+	@Override
+	public String toString() {
+		return "Multisumma 24";
+	}
+
 }

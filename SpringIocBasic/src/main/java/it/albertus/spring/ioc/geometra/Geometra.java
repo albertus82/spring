@@ -22,6 +22,14 @@ public class Geometra implements InitializingBean {
 		this.nome = nome;
 	}
 
+	public Calcolatrice getCalcolatrice() {
+		return calcolatrice;
+	}
+
+	public void setCalcolatrice(Calcolatrice calcolatrice) {
+		this.calcolatrice = calcolatrice;
+	}
+
 	public double calcolaParcella(int metriQuadrati) {
 		return calcolatrice.moltiplicazione(metriQuadrati, EURO_PER_MQ);
 	}
