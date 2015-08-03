@@ -12,10 +12,12 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
 @Controller
+//@SessionAttributes({ "utente" })
 public class HomeController {
 
 	@RequestMapping(value = { "/{nome}/{cognome}" }, method = RequestMethod.GET)
@@ -36,11 +38,11 @@ public class HomeController {
 
 	@RequestMapping(value = { "/{nome}" }, method = RequestMethod.GET)
 	public String home(@PathVariable("nome") String name, ModelMap map, HttpServletRequest request) {
-		
+
 		// Esempio di recupero del context dall'interno di un controller...
 		WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(request.getServletContext());
 		System.out.println(context.toString());
-		
+
 		Utente utente = new Utente();
 		utente.setNome(name);
 		map.addAttribute("utente", utente);

@@ -13,8 +13,8 @@ public class Utente implements Serializable {
 	private String cognome;
 	private String username;
 	private transient String password;
-	
-	@DateTimeFormat(pattern="dd/MM/yyyy")
+
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date dataNascita;
 
 	public String getNome() {
