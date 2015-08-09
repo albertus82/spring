@@ -28,7 +28,9 @@
 				</tr>
 				<tr>
 					<td colspan="2" style="text-align: center;">
-						<input type="submit" value="Accedi" style="width: 100%;" />
+						<input type="submit" value="Accedi" style="width: 40%;" />
+						o
+						<button style="width: 40%;" onclick="location.href='register';return false;">Registrati</button>
 					</td>
 				</tr>
 			</table>
