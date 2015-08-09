@@ -11,7 +11,7 @@ import java.util.Date;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 
-import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 
 public class Utente implements Serializable {
@@ -21,7 +21,7 @@ public class Utente implements Serializable {
 	@UsernameConstraints(groups = { StepOne.class })
 	private String username;
 
-	@NotEmpty(message="La password \u00E8 obbligatoria.", groups = { StepOne.class })
+	@NotBlank(message = "La password \u00E8 obbligatoria.", groups = { StepOne.class })
 	@Size(min = 5, max = 50, message = "{utente.pwd.size}", groups = { StepTwo.class })
 	private transient String password;
 
