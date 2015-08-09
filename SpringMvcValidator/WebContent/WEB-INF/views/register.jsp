@@ -2,7 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 	<head>
@@ -18,7 +18,7 @@
 		</c:if>
 		
 		<!-- Eventuali errori -->
-		<sf:errors path="utente.*" element="div" cssStyle="color:red; text-align:center; margin:1em;" />
+		<form:errors path="utente.*" element="div" cssStyle="color:red; text-align:center; margin:1em;" />
 		
 		<%-- Gestione manuale degli errori (scomoda ma possibile)
 		<c:if test="${not empty requestScope.errori}">
@@ -29,27 +29,27 @@
 			</ul>
 		</c:if> --%>
 		
-		<sf:form commandName="utente" action="register" method="POST">
+		<form:form modelAttribute="utente" action="register" method="POST">
 			<table style="margin: auto;" cellpadding="4">
 				<tr>
 					<td>Username</td>
-					<td><sf:input type="text" path="username" maxlength="50" /></td>
+					<td><form:input type="text" path="username" maxlength="25" />
 				</tr>
 				<tr>
 					<td>Password</td>
-					<td><sf:password path="password" maxlength="50" /></td>
+					<td><form:password path="password" maxlength="50" /></td>
 				</tr>
 				<tr>
 					<td>Nome</td>
-					<td><sf:input type="text" path="nome" maxlength="50" /></td>
+					<td><form:input type="text" path="nome" maxlength="50" /></td>
 				</tr>
 				<tr>
 					<td>Cognome</td>
-					<td><sf:input type="text" path="cognome" maxlength="50" /></td>
+					<td><form:input type="text" path="cognome" maxlength="50" /></td>
 				</tr>
 				<tr>
 					<td>Data di nascita</td>
-					<td><sf:input type="text" path="dataNascita" maxlength="10" /></td>
+					<td><form:input type="text" path="dataNascita" maxlength="10" /></td>
 				</tr>
 				<tr>
 					<td colspan="2" style="text-align: center;">
@@ -57,7 +57,7 @@
 					</td>
 				</tr>
 			</table>
-		</sf:form>
+		</form:form>
 		
 	</body>
 </html>
