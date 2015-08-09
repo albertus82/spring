@@ -15,7 +15,11 @@ import org.springframework.web.servlet.view.UrlBasedViewResolver;
 @ComponentScan("it.albertus.spring.web")
 public class WebConfig extends WebMvcConfigurerAdapter {
 
-	/** Configurazione del resolver per le JSP */
+	/**
+	 * Configurazione del resolver per le JSP: it's configured to look for JSP
+	 * files by wrapping view names with a specific prefix and suffix (for
+	 * example, a view name of home will be resolved as /WEB-INF/views/home.jsp).
+	 */
 	@Bean
 	public ViewResolver viewResolver() {
 		UrlBasedViewResolver resolver = new InternalResourceViewResolver();
@@ -25,7 +29,12 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 		return resolver;
 	}
 
-	/** Configurazione gestione dei contenuti statici */
+	/**
+	 * Configurazione gestione dei contenuti statici: by calling enable() on the
+	 * given DefaultServletHandlerConfigurer, you're asking DispatcherServlet to
+	 * forward requests for static resources to the servlet container's default
+	 * servlet and not to try to handle them itself.
+	 */
 	@Override
 	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
 		configurer.enable();
