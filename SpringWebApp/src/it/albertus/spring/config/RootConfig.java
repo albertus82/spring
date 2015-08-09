@@ -13,13 +13,15 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @Configuration
 @ComponentScan(basePackages = { "it.albertus.spring" },
 	excludeFilters = {
-		@Filter(type = FilterType.ANNOTATION, value = EnableWebMvc.class)
+		@Filter(type = FilterType.ANNOTATION, value = EnableWebMvc.class),
+		@Filter(type = FilterType.ANNOTATION, value = Controller.class)
 	})
 @EnableTransactionManagement(proxyTargetClass=true, mode=AdviceMode.PROXY) // Abilita l'AOP per la gestione delle transazioni. I parametri aggiuntivi sono facoltativi.
 public class RootConfig {

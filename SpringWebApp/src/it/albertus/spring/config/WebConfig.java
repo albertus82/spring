@@ -9,6 +9,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.springframework.web.servlet.view.UrlBasedViewResolver;
 
 @Configuration
 @EnableWebMvc
@@ -18,10 +19,10 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 	/** Configurazione del resolver per le JSP */
 	@Bean
 	public ViewResolver viewResolver() {
-		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+		UrlBasedViewResolver resolver = new InternalResourceViewResolver();
+		resolver.setExposeContextBeansAsAttributes(true);
 		resolver.setPrefix("/WEB-INF/views/");
 		resolver.setSuffix(".jsp");
-		resolver.setExposeContextBeansAsAttributes(true);
 		return resolver;
 	}
 

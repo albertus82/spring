@@ -24,12 +24,12 @@ public class RegisterController {
 	@Autowired
 	private UtenteService utenteService;
 	
-	@ModelAttribute("utente")
-	private Utente createUtente() {
-		Utente utente = new Utente();
-		utente.setDataNascita(new Date());
-		return utente;
-	}
+//	@ModelAttribute("utente")
+//	private Utente createUtente() {
+//		Utente utente = new Utente();
+//		utente.setDataNascita(new Date());
+//		return utente;
+//	}
 	
 	@ExceptionHandler(Exception.class)
 	public String handleException(Exception e, HttpServletRequest request) {
