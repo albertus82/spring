@@ -10,16 +10,26 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class TestController {
-	
+
 	@Autowired
 	private TestService testService;
-	
-	@RequestMapping(value = { "/test/{method}"}, method = RequestMethod.GET)
-	public String home(@PathVariable String method) {
+
+	@RequestMapping(value = { "/spring/{method}" }, method = RequestMethod.GET)
+	public String testSpring(@PathVariable String method) {
 		if ("insert".equals(method))
-			testService.insert();
+			testService.insertJdbcOperations();
 		else if ("rollback".equals(method))
-			testService.rollback();
+			testService.rollbackJdbcOperations();
 		return "success";
 	}
+
+	@RequestMapping(value = { "/jdbc/{method}" }, method = RequestMethod.GET)
+	public String testJdbc(@PathVariable String method) {
+		if ("insert".equals(method))
+			testService.insertJdbc();
+		else if ("rollback".equals(method))
+			testService.rollbackJdbc();
+		return "success";
+	}
+
 }

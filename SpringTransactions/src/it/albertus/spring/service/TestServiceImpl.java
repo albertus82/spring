@@ -20,15 +20,29 @@ public class TestServiceImpl implements TestService {
 
 	@Override
 //	@Transactional(propagation = Propagation.SUPPORTS)
-	public void insert() {
-		testDao.insert();
+	public void insertJdbcOperations() {
+		testDao.insertJdbcOperations();
 		log.info("Fine del metodo insert del service.");
 	}
 
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED) // Non eredita nulla dall'annotation sulla classe!
-	public void rollback() {
-		insert();
+	public void rollbackJdbcOperations() {
+		insertJdbcOperations();
+		log.info("Prima dell'eccezione nel service...");
+		throw new IllegalStateException();
+	}
+
+	@Override
+	public void insertJdbc() {
+		testDao.insertJdbc();
+		log.info("Fine del metodo insert del service.");
+	}
+
+	@Override
+	@Transactional(propagation = Propagation.REQUIRED)
+	public void rollbackJdbc() {
+		insertJdbc();
 		log.info("Prima dell'eccezione nel service...");
 		throw new IllegalStateException();
 	}
