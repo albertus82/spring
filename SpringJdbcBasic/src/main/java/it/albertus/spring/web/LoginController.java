@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class LoginController {
-	
+
 	@Autowired
 	private UtenteService utenteService;
-	
+
 	@RequestMapping(value = { "/" })
 	public String root(HttpServletRequest request, HttpServletResponse response) {
 		return login(request, response);
@@ -24,15 +24,15 @@ public class LoginController {
 	public String login(HttpServletRequest request, HttpServletResponse response) {
 		return "login";
 	}
-	
-	@RequestMapping(value = { "/loginAction" })
-	public String loginAction(HttpServletRequest request, HttpServletResponse response) {
+
+	@RequestMapping(value = { "/auth" })
+	public String auth(HttpServletRequest request, HttpServletResponse response) {
 		String forward;
-		
+
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
-		
-		if ( utenteService.autenticazione(username, password) != null ) {
+
+		if (utenteService.autenticazione(username, password) != null) {
 			forward = "success";
 		}
 		else {

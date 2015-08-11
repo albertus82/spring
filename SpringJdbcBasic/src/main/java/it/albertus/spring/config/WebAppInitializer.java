@@ -7,7 +7,7 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
  * e crea due Application Context di Spring: uno per i bean legati alla parte web, e un
  * altro per tutti gli altri bean (Service, DAO, ecc.).
  */
-public class Initializer extends AbstractAnnotationConfigDispatcherServletInitializer {
+public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
 	@Override
 	protected String[] getServletMappings() {

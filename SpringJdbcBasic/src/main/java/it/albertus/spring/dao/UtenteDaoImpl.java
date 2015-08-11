@@ -7,6 +7,8 @@ import java.sql.SQLException;
 
 import javax.sql.DataSource;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -14,6 +16,8 @@ import it.albertus.spring.model.Utente;
 
 @Repository
 public class UtenteDaoImpl implements UtenteDao {
+
+	private static final Log log = LogFactory.getLog(UtenteDaoImpl.class);
 
 	@Autowired
 	private DataSource dataSource;
@@ -46,12 +50,17 @@ public class UtenteDaoImpl implements UtenteDao {
 				rs.close();
 				ps.close();
 				c.close();
-			} 
+			}
 			catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
-
+		if (utente == null) {
+			log.warn("Utente non trovato!");
+		}
+		else {
+			log.info("Utente trovato!");
+		}
 		return utente;
 	}
 
