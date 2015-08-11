@@ -45,8 +45,7 @@ public class RootConfig {
 	/**
 	 * Gestisce la transazionalita' dei metodi che accedono al database. In
 	 * presenza di piu' transaction manager, bisogna specificare in
-	 * 
-	 * @Transactional quale si vuole usare, pena "NoUniqueBeanDefinitionException".
+	 * "@Transactional" quale si vuole usare, pena "NoUniqueBeanDefinitionException".
 	 */
 	@Bean
 	protected PlatformTransactionManager transactionManager(DataSource dataSource) {
