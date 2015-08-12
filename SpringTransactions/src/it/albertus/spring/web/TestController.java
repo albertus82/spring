@@ -1,6 +1,7 @@
 package it.albertus.spring.web;
 
 import it.albertus.spring.service.TestService;
+import it.albertus.spring.service.TransactionTemplateService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,8 +15,11 @@ public class TestController {
 	@Autowired
 	private TestService testService;
 
+	@Autowired
+	private TransactionTemplateService ttService;
+
 	@RequestMapping(value = { "/spring/{method}" }, method = RequestMethod.GET)
-	public String testSpring(@PathVariable String method) {
+	public String testSpring(@PathVariable String method) throws Exception {
 		if ("insert".equals(method))
 			testService.insertJdbcOperations();
 		else if ("rollback".equals(method))
@@ -29,6 +33,12 @@ public class TestController {
 			testService.insertJdbc();
 		else if ("rollback".equals(method))
 			testService.rollbackJdbc();
+		return "success";
+	}
+
+	@RequestMapping(value = { "/tt" }, method = RequestMethod.GET)
+	public String testTransactionTemplate() {
+		ttService.test(null);
 		return "success";
 	}
 

@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@Transactional(propagation = Propagation.REQUIRED)
+@Transactional(value="txManager", propagation = Propagation.REQUIRED)
 public class TestServiceImpl implements TestService {
 
 	private static final Log log = LogFactory.getLog(TestServiceImpl.class);
@@ -19,18 +19,18 @@ public class TestServiceImpl implements TestService {
 	private TestDAO testDao;
 
 	@Override
-//	@Transactional(propagation = Propagation.SUPPORTS)
 	public void insertJdbcOperations() {
 		testDao.insertJdbcOperations();
 		log.info("Fine del metodo insert del service.");
 	}
 
 	@Override
-	@Transactional(propagation = Propagation.REQUIRED) // Non eredita nulla dall'annotation sulla classe!
-	public void rollbackJdbcOperations() {
+	@Transactional(propagation = Propagation.REQUIRED)//, rollbackFor = TestException.class) // Non eredita nulla dall'annotation sulla classe!
+	public void rollbackJdbcOperations() throws Exception {
 		insertJdbcOperations();
 		log.info("Prima dell'eccezione nel service...");
-		throw new IllegalStateException();
+		throw new IllegalStateException("Test rollback automatico!");
+//		throw new TestException("Test rollback esplicito!");
 	}
 
 	@Override
@@ -40,11 +40,11 @@ public class TestServiceImpl implements TestService {
 	}
 
 	@Override
-	@Transactional(propagation = Propagation.REQUIRED)
+//	@Transactional(propagation = Propagation.REQUIRED)
 	public void rollbackJdbc() {
 		insertJdbc();
 		log.info("Prima dell'eccezione nel service...");
-		throw new IllegalStateException();
+		throw new IllegalStateException("Test rollback!");
 	}
 
 }
