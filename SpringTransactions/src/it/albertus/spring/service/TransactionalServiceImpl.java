@@ -1,6 +1,6 @@
 package it.albertus.spring.service;
 
-import it.albertus.spring.dao.TestDAO;
+import it.albertus.spring.dao.TransactionalDAO;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -11,12 +11,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional(value="txManager", propagation = Propagation.REQUIRED)
-public class TestServiceImpl implements TestService {
+public class TransactionalServiceImpl implements TransactionalService {
 
-	private static final Log log = LogFactory.getLog(TestServiceImpl.class);
+	private static final Log log = LogFactory.getLog(TransactionalServiceImpl.class);
 
 	@Autowired
-	private TestDAO testDao;
+	private TransactionalDAO testDao;
 
 	@Override
 	public void insertJdbcOperations() {
@@ -34,15 +34,15 @@ public class TestServiceImpl implements TestService {
 	}
 
 	@Override
-	public void insertJdbc() {
+	public void insertBasicJdbc() {
 		testDao.insertJdbc();
 		log.info("Fine del metodo insert del service.");
 	}
 
 	@Override
 //	@Transactional(propagation = Propagation.REQUIRED)
-	public void rollbackJdbc() {
-		insertJdbc();
+	public void rollbackBasicJdbc() {
+		insertBasicJdbc();
 		log.info("Prima dell'eccezione nel service...");
 		throw new IllegalStateException("Test rollback!");
 	}

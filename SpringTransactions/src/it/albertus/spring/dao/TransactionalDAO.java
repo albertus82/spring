@@ -1,6 +1,6 @@
 package it.albertus.spring.dao;
 
-public interface TestDAO {
+public interface TransactionalDAO {
 
 	void insertJdbcOperations();
 

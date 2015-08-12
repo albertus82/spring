@@ -1,7 +1,7 @@
 package it.albertus.spring.web;
 
-import it.albertus.spring.service.TestService;
 import it.albertus.spring.service.TransactionTemplateService;
+import it.albertus.spring.service.TransactionalService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,35 +10,35 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-public class TestController {
+public class TransactionsController {
 
 	@Autowired
-	private TestService testService;
+	private TransactionalService transactionalService;
 
 	@Autowired
-	private TransactionTemplateService ttService;
+	private TransactionTemplateService transactionTemplateService;
 
 	@RequestMapping(value = { "/spring/{method}" }, method = RequestMethod.GET)
-	public String testSpring(@PathVariable String method) throws Exception {
+	public String testTransactionalJdbcOperations(@PathVariable String method) throws Exception {
 		if ("insert".equals(method))
-			testService.insertJdbcOperations();
+			transactionalService.insertJdbcOperations();
 		else if ("rollback".equals(method))
-			testService.rollbackJdbcOperations();
+			transactionalService.rollbackJdbcOperations();
 		return "success";
 	}
 
 	@RequestMapping(value = { "/jdbc/{method}" }, method = RequestMethod.GET)
-	public String testJdbc(@PathVariable String method) {
+	public String testTransactionalBasicJdbc(@PathVariable String method) {
 		if ("insert".equals(method))
-			testService.insertJdbc();
+			transactionalService.insertBasicJdbc();
 		else if ("rollback".equals(method))
-			testService.rollbackJdbc();
+			transactionalService.rollbackBasicJdbc();
 		return "success";
 	}
 
 	@RequestMapping(value = { "/tt" }, method = RequestMethod.GET)
 	public String testTransactionTemplate() {
-		ttService.test(null);
+		transactionTemplateService.test(null);
 		return "success";
 	}
 

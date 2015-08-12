@@ -20,9 +20,9 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 // Non occorre specificare il nome del bean PlatformTransactionManager ("transactionManager") se ne esiste solo uno!
 @Transactional(value = "transactionManager", propagation = Propagation.MANDATORY) // Bisogna arrivare qui con una transazione gia' attiva!
-public class TestDAOImpl extends BaseDAO implements TestDAO {
+public class TransactionalDAOImpl extends BaseDAO implements TransactionalDAO {
 
-	private static final Log log = LogFactory.getLog(TestDAOImpl.class);
+	private static final Log log = LogFactory.getLog(TransactionalDAOImpl.class);
 
 	@Autowired
 	private DataSource dataSource;
