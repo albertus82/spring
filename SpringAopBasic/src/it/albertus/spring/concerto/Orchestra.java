@@ -15,7 +15,7 @@ public class Orchestra extends Interprete {
 			System.out.println(getClass().getSimpleName() + " - Stonatura!");
 			throw new StonaturaException();
 		}
-		return 30;
+		return 25 + (int) ((Math.random() - 0.5) * 10);
 	}
 
 }
