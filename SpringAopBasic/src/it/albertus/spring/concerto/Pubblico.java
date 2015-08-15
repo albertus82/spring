@@ -1,5 +1,6 @@
 package it.albertus.spring.concerto;
 
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.AfterThrowing;
@@ -11,7 +12,7 @@ import org.springframework.stereotype.Component;
 @Component // Deve essere un bean gestito da Spring!
 @Aspect
 public class Pubblico {
-	
+
 	@Pointcut("execution(** it.albertus.spring.concerto.Interprete.esegui(..))") // Si puo' specificare sia Interprete che Orchestra.
 	private void esecuzione() {}; // Marcatore
 
@@ -21,8 +22,8 @@ public class Pubblico {
 	}
 
 	@Before("esecuzione()")
-	public void takeSeats() {
-		System.out.println(getClass().getSimpleName() + " - " + "Prende posto...");
+	public void takeSeats(JoinPoint jp) {
+		System.out.println(getClass().getSimpleName() + " - " + "Prende posto..." + " (Joinpoint: " + getJoinPointInfo(jp) + ')');
 	}
 
 	@After(value = "esecuzione() && args(opera)")
@@ -38,6 +39,10 @@ public class Pubblico {
 	@AfterThrowing(value = "esecuzione()", throwing = "eccezione")
 	public void demandRefund(Throwable eccezione) {
 		System.out.println(getClass().getSimpleName() + " - " + "BUUU!!! RIDATECI I SOLDI! (" + eccezione.getClass().getSimpleName() + ')');
+	}
+
+	private String getJoinPointInfo(JoinPoint jp) {
+		return jp.toLongString();
 	}
 
 }
