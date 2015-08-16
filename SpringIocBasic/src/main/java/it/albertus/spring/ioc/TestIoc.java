@@ -17,7 +17,7 @@ public class TestIoc {
 	public static void main(String... args) {
 		ConfigurableApplicationContext context = new AnnotationConfigApplicationContext(TestIoc.class);
 
-		Geometra geometra = (Geometra) context.getBean("geometra");
+		Geometra geometra = context.getBean(Geometra.class);
 
 		int metriQuadrati;
 		try {
