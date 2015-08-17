@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="src/main/java"/>
+	<classpathentry kind="src" path="src/main/resources"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="lib/commons-logging-1.2.jar" sourcepath="lib/src/commons-logging-1.2-src.zip"/>
 	<classpathentry kind="lib" path="lib/spring-context-4.1.6.RELEASE.jar" sourcepath="lib/src/spring-context-4.1.6.RELEASE-sources.jar"/>
