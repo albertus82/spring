@@ -1,4 +1,4 @@
-package it.albertus.spring.ioc.geometra;
+package it.albertus.spring.ioc.model;
 
 import it.albertus.util.SoundPlayer;
 

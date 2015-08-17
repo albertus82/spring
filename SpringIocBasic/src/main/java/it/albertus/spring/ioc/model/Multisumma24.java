@@ -1,14 +1,14 @@
-package it.albertus.spring.ioc.geometra;
+package it.albertus.spring.ioc.model;
 
 import it.albertus.util.ThreadUtils;
 
 import org.springframework.stereotype.Component;
 
 @Component
-public class Programma101 extends Calcolatrice {
+public class Multisumma24 extends Calcolatrice {
 
-	private static final int ATTESA = 850;
-	private static final String RUMORE = '/' + Programma101.class.getPackage().getName().replace('.', '/') + "/p101_22k_8b.wav";
+	private static final int ATTESA = 4050;
+	private static final String RUMORE = '/' + Multisumma24.class.getPackage().getName().replace('.', '/') + "/ms24_22k_8b.wav";
 
 	@Override
 	public double addizione(double a, double b) {
@@ -33,20 +33,12 @@ public class Programma101 extends Calcolatrice {
 
 	@Override
 	public double divisione(double a, double b) {
-		soundPlayer.play(this.getClass().getResourceAsStream(RUMORE));
-		ThreadUtils.sleep(ATTESA);
-		return super.divisione(a, b);
-	}
-
-	public double radiceQuadrata(double operando) {
-		soundPlayer.play(this.getClass().getResourceAsStream(RUMORE));
-		ThreadUtils.sleep(ATTESA);
-		return Math.sqrt(operando);
+		throw new UnsupportedOperationException("Operazione non disponibile sulla Olivetti Multisumma 24.");
 	}
 
 	@Override
 	public String toString() {
-		return "Programma 101";
+		return "Multisumma 24";
 	}
 
 }
