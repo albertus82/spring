@@ -4,13 +4,9 @@ import it.albertus.spring.ioc.model.Geometra;
 import it.albertus.util.ThreadUtils;
 
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-@Configuration
-@ComponentScan(basePackages = "it.albertus")
-public class IocExample {
+public class EsempioIoc {
 
 	public static void main(String... args) {
 		ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("spring-ctx.xml");
@@ -33,6 +29,7 @@ public class IocExample {
 
 		ThreadUtils.sleep(1500);
 		System.out.println("Tempo impiegato per il calcolo: " + (fine - inizio) + " ms.");
+		ThreadUtils.sleep(500);
 		context.close();
 	}
 

@@ -7,8 +7,7 @@
 		http://www.springframework.org/schema/context 
 		http://www.springframework.org/schema/context/spring-context.xsd">
 
-	<context:annotation-config />
-	<bean class="it.albertus.spring.ioc.IocExample" />
+	<context:component-scan base-package="it.albertus" />
 
 	<bean id="geometra" class="it.albertus.spring.ioc.model.Geometra">
 		<property name="calcolatrice" ref="programma101" />
