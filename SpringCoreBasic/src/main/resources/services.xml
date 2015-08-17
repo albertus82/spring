@@ -7,8 +7,8 @@
 		http://www.springframework.org/schema/context 
 		http://www.springframework.org/schema/context/spring-context.xsd">
 
-	 <context:annotation-config />
-	<bean class="it.albertus.spring.config.AppConfig" />  
+	<context:annotation-config />
+	<bean class="it.albertus.spring.config.AppConfig" />
 
 	<!-- <context:component-scan base-package="it.albertus.spring" /> -->
 
