@@ -16,4 +16,10 @@
 		<property name="accountDao" ref="acctDao" />
 	</bean>
 
+	<bean id="testFactoryService" class="it.albertus.spring.service.TestFactoryServiceImpl" factory-method="getInstance">
+		<constructor-arg index="0" value="100" />
+		<constructor-arg index="1" value="Test String" />
+		<constructor-arg index="2" ref="testFactoryDao" />
+	</bean>
+
 </beans>

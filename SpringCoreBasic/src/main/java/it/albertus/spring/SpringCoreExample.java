@@ -4,6 +4,7 @@ import it.albertus.spring.config.AppConfig;
 import it.albertus.spring.service.AccountService;
 import it.albertus.spring.service.CurrencyService;
 import it.albertus.spring.service.ExchangeService;
+import it.albertus.spring.service.TestFactoryService;
 
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -21,6 +22,7 @@ public class SpringCoreExample {
 		System.out.println(context.getBean("acctSvc", AccountService.class));
 		System.out.println(context.getBean(CurrencyService.class));
 		System.out.println(context.getBean(ExchangeService.class));
+		System.out.println(context.getBean(TestFactoryService.class));
 
 		/* Distruzione del context di Spring */
 		context.close();
