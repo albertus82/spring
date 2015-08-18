@@ -2,9 +2,10 @@ package it.albertus.spring.util;
 
 import java.util.Date;
 
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
-@Component
+@Component @Primary
 public class Logger {
 
 	enum Level {
@@ -20,4 +21,5 @@ public class Logger {
 	public void error(String message, Class<? extends Object> clazz) {
 		System.err.println(new Date() + " - " + clazz.getName() + " - " + Level.ERROR + " - " + message);
 	}
+
 }
