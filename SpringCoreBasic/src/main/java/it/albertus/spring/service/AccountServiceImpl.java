@@ -2,9 +2,10 @@ package it.albertus.spring.service;
 
 import it.albertus.spring.dao.AccountDao;
 
+import org.springframework.beans.factory.BeanNameAware;
 import org.springframework.beans.factory.annotation.Required;
 
-public class AccountServiceImpl implements AccountService {
+public class AccountServiceImpl implements AccountService, BeanNameAware {
 
 	private AccountDao accountDao;
 
@@ -16,6 +17,11 @@ public class AccountServiceImpl implements AccountService {
 	@Override
 	public String toString() {
 		return "AccountServiceImpl [accountDao=" + accountDao + "]";
+	}
+
+	@Override
+	public void setBeanName(String name) {
+		System.out.println("BeanNameAware bean: " + name);
 	}
 
 }

@@ -3,11 +3,13 @@ package it.albertus.spring.config;
 import it.albertus.spring.dao.ExchangeDao;
 import it.albertus.spring.dao.ExchangeDaoImpl;
 import it.albertus.spring.service.ExchangeService;
+import it.albertus.spring.service.ExchangeServiceAlternativeImpl;
 import it.albertus.spring.service.ExchangeServiceImpl;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
+import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -16,14 +18,14 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @ComponentScan(basePackages = { "it.albertus.spring.service", "it.albertus.spring.dao" })
-public class AppConfig implements BeanFactoryPostProcessor {
+public class AppConfig implements BeanFactoryPostProcessor, BeanPostProcessor {
 
 	@Bean
 	public ExchangeDao exchgDao() {
 		return new ExchangeDaoImpl();
 	}
 
-	@Bean
+	@Bean(initMethod = "customInit", destroyMethod = "customDestroy")
 	public ExchangeService exchgSvc(@Qualifier("exchgDao") ExchangeDao dao) {
 		ExchangeServiceImpl svc = new ExchangeServiceImpl();
 		svc.setExchangeDao(dao);
@@ -41,6 +43,24 @@ public class AppConfig implements BeanFactoryPostProcessor {
 	@Override
 	public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
 		System.out.println(getClass().getSimpleName() + ".postProcessBeanFactory");
+	}
+
+	@Override
+	public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
+		System.out.println("Post-processing before initialization bean " + beanName + ": " + bean.toString());
+		return bean;
+	}
+
+	@Override
+	public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
+		System.out.println("Post-processing after initialization bean " + beanName + ": " + bean.toString());
+		if (bean instanceof ExchangeServiceImpl) {
+			ExchangeServiceImpl es = (ExchangeServiceImpl) bean;
+			ExchangeServiceAlternativeImpl test = new ExchangeServiceAlternativeImpl();
+			test.setExchangeDao(es.getExchangeDao());
+			bean = test;
+		}
+		return bean;
 	}
 
 }
