@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -95,6 +96,12 @@ public class InputController {
 		results += "Bean prelevato dal context root: " + carService.toString() + ". ";
 
 		return results;
+	}
+
+	@RequestMapping(value = "/body", method = RequestMethod.POST, consumes = "text/*")
+	@ResponseBody
+	public String body(@RequestBody String body) {
+		return "Il corpo della request era: \"" + body + "\"";
 	}
 
 }
