@@ -14,18 +14,18 @@ public class RootInterceptor implements HandlerInterceptor {
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
-		log.info("preHandle");
+		log.info("preHandle: " + handler.toString());
 		return true;
 	}
 
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) {
-		log.info("postHandle");
+		log.info("postHandle: " + handler.toString());
 	}
 
 	@Override
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
-		log.info("afterCompletion");
+		log.info("afterCompletion: " + handler.toString());
 	}
 
 }

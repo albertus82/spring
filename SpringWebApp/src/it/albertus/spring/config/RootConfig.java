@@ -3,6 +3,7 @@ package it.albertus.spring.config;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AdviceMode;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -52,6 +53,14 @@ public class RootConfig {
 	@Scope(BeanDefinition.SCOPE_SINGLETON) // E' il valore di default.
 	protected DataSourceTransactionManager transactionManager(DataSource dataSource) {
 		return new DataSourceTransactionManager(dataSource);
+	}
+	
+	public static String getBeanNames(ApplicationContext context) {
+		StringBuilder beanNames = new StringBuilder(System.getProperty("line.separator"));
+		for (String beanName : context.getBeanDefinitionNames()) {
+			beanNames.append(beanName).append(System.getProperty("line.separator"));
+		}
+		return ">>> Elenco bean <<<" + beanNames.toString() + ">>> Fine elenco bean <<<";
 	}
 	
 }
