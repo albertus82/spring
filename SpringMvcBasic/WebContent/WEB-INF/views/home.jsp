@@ -11,6 +11,9 @@
 		<h1>
 			Benvenuto ${utente.nome}!
 		</h1>
+		<h3>
+			Counter: ${sessionData.counter}
+		</h3>
 		
 		<c:if test="${not empty sessionScope.utente}">
 			<h2>

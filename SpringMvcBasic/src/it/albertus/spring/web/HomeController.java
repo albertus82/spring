@@ -7,18 +7,27 @@ import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
 @Controller
 //@SessionAttributes({ "utente" })
 public class HomeController {
+
+	@Autowired
+	private SessionData sessionData;
+
+	@ModelAttribute
+	private SessionData getSessionData() {
+		return sessionData;
+	}
 
 	@RequestMapping(value = { "/{nome}/{cognome}" }, method = RequestMethod.GET)
 	public String home(@PathVariable("nome") String name, @PathVariable("cognome") String cognome, ModelMap map) {
@@ -46,6 +55,10 @@ public class HomeController {
 		Utente utente = new Utente();
 		utente.setNome(name);
 		map.addAttribute("utente", utente);
+		sessionData.setCounter(sessionData.getCounter() + 1);
+		System.out.println(sessionData.getCounter());
+
 		return "home";
 	}
+
 }
