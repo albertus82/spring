@@ -17,7 +17,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@ComponentScan(basePackages = { "it.albertus.spring.service", "it.albertus.spring.dao" })
+@ComponentScan(basePackages = { "it.albertus.spring.service", "it.albertus.spring.dao", "it.albertus.spring.prototype" })
 public class AppConfig implements BeanFactoryPostProcessor, BeanPostProcessor {
 
 	@Bean

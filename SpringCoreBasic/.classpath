@@ -9,5 +9,6 @@
 	<classpathentry kind="lib" path="lib/spring-core-4.1.6.RELEASE.jar" sourcepath="lib/src/spring-core-4.1.6.RELEASE-sources.jar"/>
 	<classpathentry kind="lib" path="lib/spring-aop-4.1.6.RELEASE.jar" sourcepath="lib/src/spring-aop-4.1.6.RELEASE-sources.jar"/>
 	<classpathentry kind="lib" path="lib/spring-expression-4.1.6.RELEASE.jar" sourcepath="lib/src/spring-expression-4.1.6.RELEASE-sources.jar"/>
+	<classpathentry kind="lib" path="lib/aopalliance.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
