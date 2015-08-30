@@ -15,4 +15,4 @@ import org.springframework.security.web.context.AbstractSecurityWebApplicationIn
  * into the application and delegate them to a bean whose ID is
  * springSecurityFilterChain.
  */
-public class SecurityInitializer extends AbstractSecurityWebApplicationInitializer {}
+public class SecurityWebAppInitializer extends AbstractSecurityWebApplicationInitializer {}

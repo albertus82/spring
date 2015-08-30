@@ -28,35 +28,36 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-	
+
 	/**
 	 * Per permettere a Spring Security di accedere al database e recuperare le
 	 * credenziali.
 	 */
 	@Autowired
 	private DataSource dataSource;
-	
+
 	/**
 	 * Per caricare tutti i dati dell'utente, non solo quelli previsti da Spring
 	 * Security.
 	 */
 	@Autowired
 	private UtenteService utenteService;
-	
+
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		// Caricamento personalizzato dei dati dell'utente...
 		auth.userDetailsService(utenteService);
 	}
-	
+
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests().anyRequest().authenticated();
 		
 		// Configurazione della pagina di login personalizzata...
-		http.formLogin().loginPage("/customlogin").permitAll();
-		
-		http.logout().logoutSuccessUrl("/home");
+		http.formLogin().loginPage("/customlogin").permitAll().defaultSuccessUrl("/home");
+
+		// Logout
+		http.logout().logoutSuccessUrl("/customlogin");
 	}
 
 }
