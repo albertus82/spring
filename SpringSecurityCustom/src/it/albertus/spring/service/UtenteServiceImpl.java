@@ -33,12 +33,12 @@ public class UtenteServiceImpl implements UtenteService {
 	}
 
 	@Override
-	public Utente loadUserByUsername(String username) throws UsernameNotFoundException {
+	public Utente loadUserByUsername(String username) {
 		Utente utente = utenteDao.findById(username);
 		if (utente == null) {
 			throw new UsernameNotFoundException("Utente non presente o problema di connessione al database.");
 		}
-		return utente;
+		return utente; /* Non si deve mai restituire null! */
 	}
 
 }

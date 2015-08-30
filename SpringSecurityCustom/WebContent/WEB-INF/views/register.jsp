@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 	<head>
@@ -16,7 +16,7 @@
 			<div style="color:red; text-align:center; margin:1em;"><strong>${requestScope.messaggio}</strong></div>
 		</c:if>
 		
-		<form action="register" method="POST">
+		<sf:form action="register" method="POST">
 			<table style="margin: auto;" cellpadding="4">
 				<tr>
 					<td>Username</td>
@@ -44,7 +44,7 @@
 					</td>
 				</tr>
 			</table>
-		</form>
+		</sf:form>
 		
 	</body>
 </html>

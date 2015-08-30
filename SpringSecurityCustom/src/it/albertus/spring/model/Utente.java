@@ -1,6 +1,5 @@
 package it.albertus.spring.model;
 
-import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 
@@ -8,9 +7,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-public class Utente implements Serializable, UserDetails {
+public class Utente implements UserDetails {
 
-	private static final long serialVersionUID = -2469030823598758896L;
+	private static final long serialVersionUID = -2464030823598758896L;
 
 	private String nome;
 	private String cognome;
@@ -36,6 +35,7 @@ public class Utente implements Serializable, UserDetails {
 		this.cognome = cognome;
 	}
 
+	@Override
 	public String getUsername() {
 		return username;
 	}
@@ -44,6 +44,7 @@ public class Utente implements Serializable, UserDetails {
 		this.username = username;
 	}
 
+	@Override
 	public String getPassword() {
 		return password;
 	}

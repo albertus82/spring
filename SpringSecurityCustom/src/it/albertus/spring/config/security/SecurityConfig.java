@@ -56,7 +56,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		// Configurazione della pagina di login personalizzata...
 		http.formLogin().loginPage("/customlogin").permitAll();
 		
-		http.httpBasic();
+		http.logout().logoutSuccessUrl("/home");
 	}
 
 }
