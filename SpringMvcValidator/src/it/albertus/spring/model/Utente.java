@@ -1,5 +1,6 @@
 package it.albertus.spring.model;
 
+import it.albertus.spring.model.validation.PasswordConstraint;
 import it.albertus.spring.model.validation.StepOne;
 import it.albertus.spring.model.validation.StepThree;
 import it.albertus.spring.model.validation.StepTwo;
@@ -23,6 +24,7 @@ public class Utente implements Serializable {
 
 	@NotBlank(message = "La password \u00E8 obbligatoria.", groups = { StepOne.class })
 	@Size(min = 5, max = 50, message = "{utente.pwd.size}", groups = { StepTwo.class })
+	@PasswordConstraint(groups = { StepTwo.class })
 	private transient String password;
 
 	@Size(min = 1, max = 50, message = "{utente.nome}", groups = { StepThree.class })
