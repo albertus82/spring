@@ -7,8 +7,8 @@ GRANT EXECUTE ON sys.DBMS_SYSTEM TO hr;
 CREATE TABLE hr.jta_bitronix_test
 (
     id                 NUMBER (20, 0) CONSTRAINT pk_jta_bitronix_test PRIMARY KEY,
-    testo              VARCHAR2 (64 CHAR) CONSTRAINT nn_jta_bitronix_test_text NOT NULL,
-    data_inserimento   TIMESTAMP (3) DEFAULT SYSTIMESTAMP CONSTRAINT nn_jta_bitronix_text_data_ins NOT NULL
+    testo              VARCHAR2 (64 CHAR) CONSTRAINT nn1_jta_bitronix_test_testo NOT NULL,
+    data_inserimento   TIMESTAMP (3) DEFAULT SYSTIMESTAMP CONSTRAINT nn2_jta_bitronix_test_data_ins NOT NULL
 );
 
 CREATE SEQUENCE hr.seq_jta_bitronix_test;
