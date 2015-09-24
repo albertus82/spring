@@ -13,10 +13,6 @@ public class TransactionTemplateDAOImpl extends BaseDAO implements TransactionTe
 
 	private static final Log log = LogFactory.getLog(TransactionTemplateDAOImpl.class);
 
-	// @Autowired
-	// @Qualifier("albAdminDataSource")
-	// private DataSource albAdminDataSource;
-
 	@Override
 	public boolean test(Long param) throws IllegalAccessException {
 		Map<String, String> params = new HashMap<String, String>();
@@ -29,11 +25,11 @@ public class TransactionTemplateDAOImpl extends BaseDAO implements TransactionTe
 			params.put("nm", i + "-3-" + sysdate.getTimeInMillis());
 			params.put("cg", i + "-4-" + sysdate.getTimeInMillis());
 			albAdminJdbcOperations.update("INSERT INTO utenti (username, cognome, nome, password) VALUES (:un, :cg, :nm, :pw)", params);
-			log.info("Insert eseguita con " + albAdminJdbcOperations.getClass().getSimpleName() + '.');
+			log.info("Insert eseguita con " + albAdminJdbcOperations + '.');
 
 			params.put("txt", i + "-" + sysdate.getTimeInMillis());
 			hrJdbcOperations.update("INSERT INTO jta_bitronix_test (id, testo) VALUES (seq_jta_bitronix_test.NEXTVAL, :txt)", params);
-			log.info("Insert eseguita con " + hrJdbcOperations.getClass().getSimpleName() + '.');
+			log.info("Insert eseguita con " + hrJdbcOperations + '.');
 		}
 		// throw new IllegalArgumentException("Test rollback!");
 		// throw new IllegalAccessException("Test rollback!");
