@@ -28,6 +28,9 @@ public class AzureFileStorage implements FileStorage {
 	@Value("${azure.storageConnectionString}")
 	private String storageConnectionString;
 
+	@Value("${azure.containerName}")
+	private String containerName;
+
 	public InputStream downloadAsStream(final String sourceFileName) throws FileStorageException, FileNotFoundException {
 		CloudBlob blob = getBlobFromCloud(sourceFileName);
 
@@ -37,7 +40,9 @@ public class AzureFileStorage implements FileStorage {
 			logger.debug("InputStream ottenuto per il file \"" + sourceFileName + "\"");
 		}
 		catch (StorageException se) {
-			throw new FileStorageException("Errore del servizio di storage Azure", se);
+			final String message = "Impossibile scaricare il file " + sourceFileName + ": errore del servizio di storage";
+			logger.error(message + " - " + se.toString());
+			throw new FileStorageException(message, se);
 		}
 		return is;
 	}
@@ -102,14 +107,18 @@ public class AzureFileStorage implements FileStorage {
 	private CloudBlobContainer getBlobContainer(final CloudBlobClient blobClient) throws FileStorageException {
 		CloudBlobContainer container = null;
 		try {
-			container = blobClient.getContainerReference("test-container");
+			container = blobClient.getContainerReference(containerName);
 			logger.debug("CloudBlobContainer: " + container);
 		}
 		catch (URISyntaxException use) {
-			throw new FileStorageException("Nome container non valido", use);
+			final String message = "Nome container non valido: " + containerName;
+			logger.error(message + " - " + use.toString());
+			throw new FileStorageException(message, use);
 		}
 		catch (StorageException se) {
-			throw new FileStorageException("Errore del servizio di storage Azure", se);
+			final String message = "Errore del servizio di storage Azure";
+			logger.error(message + " - " + se.toString());
+			throw new FileStorageException(message, se);
 		}
 		return container;
 	}
