@@ -1,5 +1,6 @@
-package it.albertus.azure.client;
+package it.albertus.azure;
 
+import it.albertus.azure.client.FileStorage;
 import it.albertus.azure.config.SpringContext;
 
 import java.io.IOException;

@@ -4,6 +4,10 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
+/**
+ * Interfaccia che rappresenta un sistema di storage indipendentemente
+ * dall'implementazione specifica (cloud, server FTP, file system, ecc.).
+ */
 public interface FileStorage {
 
 	/**
