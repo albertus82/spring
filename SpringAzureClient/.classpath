@@ -2,54 +2,13 @@
 <classpath>
 	<classpathentry kind="src" path="src/main/java"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="lib/spring-core-4.2.4.RELEASE.jar" sourcepath="lib/src/spring-core-4.2.4.RELEASE-sources.jar"/>
-	<classpathentry kind="lib" path="lib/spring-context-4.2.4.RELEASE.jar" sourcepath="lib/src/spring-context-4.2.4.RELEASE-sources.jar"/>
-	<classpathentry kind="lib" path="lib/spring-beans-4.2.4.RELEASE.jar" sourcepath="lib/src/spring-beans-4.2.4.RELEASE-sources.jar"/>
+	<classpathentry kind="lib" path="lib/azure-storage-4.0.0.jar" sourcepath="lib/src/azure-storage-4.0.0-sources.jar"/>
+	<classpathentry kind="lib" path="lib/commons-io-2.4.jar" sourcepath="lib/src/commons-io-2.4-src.zip"/>
 	<classpathentry kind="lib" path="lib/commons-logging-1.2.jar" sourcepath="lib/src/commons-logging-1.2-src.zip"/>
 	<classpathentry kind="lib" path="lib/spring-aop-4.2.4.RELEASE.jar" sourcepath="lib/src/spring-aop-4.2.4.RELEASE-sources.jar"/>
+	<classpathentry kind="lib" path="lib/spring-beans-4.2.4.RELEASE.jar" sourcepath="lib/src/spring-beans-4.2.4.RELEASE-sources.jar"/>
+	<classpathentry kind="lib" path="lib/spring-context-4.2.4.RELEASE.jar" sourcepath="lib/src/spring-context-4.2.4.RELEASE-sources.jar"/>
+	<classpathentry kind="lib" path="lib/spring-core-4.2.4.RELEASE.jar" sourcepath="lib/src/spring-core-4.2.4.RELEASE-sources.jar"/>
 	<classpathentry kind="lib" path="lib/spring-expression-4.2.4.RELEASE.jar" sourcepath="lib/src/spring-expression-4.2.4.RELEASE-sources.jar"/>
-	<classpathentry kind="lib" path="lib/azure/annotation-detector-3.0.4.jar"/>
-	<classpathentry kind="lib" path="lib/azure/applicationinsights-core-1.0.2.jar"/>
-	<classpathentry kind="lib" path="lib/azure/applicationinsights-web-1.0.2.jar"/>
-	<classpathentry kind="lib" path="lib/azure/azure-core-0.9.0.jar"/>
-	<classpathentry kind="lib" path="lib/azure/azure-media-0.9.0.jar"/>
-	<classpathentry kind="lib" path="lib/azure/azure-servicebus-0.9.0.jar"/>
-	<classpathentry kind="lib" path="lib/azure/azure-serviceruntime-0.9.0.jar"/>
-	<classpathentry kind="lib" path="lib/azure/azure-storage-4.0.0.jar" sourcepath="lib/src/azure-storage-4.0.0-sources.jar"/>
-	<classpathentry kind="lib" path="lib/azure/azure-svc-mgmt-0.9.0.jar"/>
-	<classpathentry kind="lib" path="lib/azure/azure-svc-mgmt-compute-0.9.0.jar"/>
-	<classpathentry kind="lib" path="lib/azure/azure-svc-mgmt-media-0.9.0.jar"/>
-	<classpathentry kind="lib" path="lib/azure/azure-svc-mgmt-network-0.9.0.jar"/>
-	<classpathentry kind="lib" path="lib/azure/azure-svc-mgmt-scheduler-0.9.0.jar"/>
-	<classpathentry kind="lib" path="lib/azure/azure-svc-mgmt-sql-0.9.0.jar"/>
-	<classpathentry kind="lib" path="lib/azure/azure-svc-mgmt-storage-0.9.0.jar"/>
-	<classpathentry kind="lib" path="lib/azure/azure-svc-mgmt-websites-0.9.0.jar"/>
-	<classpathentry kind="lib" path="lib/azure/azure-tracing-util-0.9.0.jar"/>
-	<classpathentry kind="lib" path="lib/azure/commons-codec-1.10.jar"/>
-	<classpathentry kind="lib" path="lib/azure/commons-io-2.4.jar"/>
-	<classpathentry kind="lib" path="lib/azure/commons-lang-2.6.jar"/>
-	<classpathentry kind="lib" path="lib/azure/commons-lang3-3.4.jar"/>
-	<classpathentry kind="lib" path="lib/azure/commons-logging-1.1.3.jar"/>
-	<classpathentry kind="lib" path="lib/azure/gson-1.7.2.jar"/>
-	<classpathentry kind="lib" path="lib/azure/guava-18.0.jar"/>
-	<classpathentry kind="lib" path="lib/azure/httpclient-4.3.6.jar"/>
-	<classpathentry kind="lib" path="lib/azure/httpcore-4.3.3.jar"/>
-	<classpathentry kind="lib" path="lib/azure/jackson-annotations-2.6.0.jar"/>
-	<classpathentry kind="lib" path="lib/azure/jackson-core-2.6.0.jar"/>
-	<classpathentry kind="lib" path="lib/azure/jackson-core-asl-1.9.2.jar"/>
-	<classpathentry kind="lib" path="lib/azure/jackson-databind-2.6.0.jar"/>
-	<classpathentry kind="lib" path="lib/azure/jackson-jaxrs-1.9.2.jar"/>
-	<classpathentry kind="lib" path="lib/azure/jackson-mapper-asl-1.9.2.jar"/>
-	<classpathentry kind="lib" path="lib/azure/jackson-xc-1.9.2.jar"/>
-	<classpathentry kind="lib" path="lib/azure/javax.inject-1.jar"/>
-	<classpathentry kind="lib" path="lib/azure/jaxb-impl-2.2.3-1.jar"/>
-	<classpathentry kind="lib" path="lib/azure/jersey-client-1.13.jar"/>
-	<classpathentry kind="lib" path="lib/azure/jersey-core-1.13.jar"/>
-	<classpathentry kind="lib" path="lib/azure/jersey-json-1.13.jar"/>
-	<classpathentry kind="lib" path="lib/azure/jettison-1.1.jar"/>
-	<classpathentry kind="lib" path="lib/azure/jjwt-0.5.1.jar"/>
-	<classpathentry kind="lib" path="lib/azure/jsr305-1.3.9.jar"/>
-	<classpathentry kind="lib" path="lib/azure/mail-1.4.5.jar"/>
-	<classpathentry kind="lib" path="lib/commons-io-2.4.jar" sourcepath="lib/src/commons-io-2.4-src.zip"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
