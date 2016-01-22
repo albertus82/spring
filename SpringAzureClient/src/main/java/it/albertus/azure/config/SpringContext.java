@@ -11,6 +11,7 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 @PropertySource({ "file:/azure.properties" })
 public class SpringContext {
 
+	/* Abilita la risoluzione dei segnaposti ${...} nelle annotation @Value */
 	@Bean
 	public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
 		return new PropertySourcesPlaceholderConfigurer();

@@ -26,7 +26,7 @@ public class AzureClientLauncher {
 		try {
 			client.downloadToFile(source, destination);
 			if (source.endsWith(".txt")) {
-				System.out.println("Contenuto del file " + source + ": \"" + IOUtils.toString(client.downloadAsStream(source)) + "\"");
+				System.out.println("Contenuto del file " + source + ": \"" + IOUtils.toString(client.downloadAsStream(source)) + '"');
 			}
 		}
 		catch (IOException e) {
