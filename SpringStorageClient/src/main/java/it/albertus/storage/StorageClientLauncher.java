@@ -2,9 +2,6 @@ package it.albertus.storage;
 
 import it.albertus.storage.config.SpringContext;
 
-import java.io.IOException;
-
-import org.apache.commons.io.IOUtils;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -20,20 +17,11 @@ public class StorageClientLauncher {
 
 		ConfigurableApplicationContext context = new AnnotationConfigApplicationContext(SpringContext.class);
 
-		FileStorage client = context.getBean(FileStorage.class);
+		StorageClient client = context.getBean(StorageClient.class);
 
-		try {
-			client.downloadToFile(source, destination);
-			if (source.endsWith(".txt")) {
-				System.out.println("Contenuto del file " + source + ": \"" + IOUtils.toString(client.downloadAsStream(source)) + '"');
-			}
-		}
-		catch (IOException e) {
-			e.printStackTrace();
-		}
-		finally {
-			context.close();
-		}
+		client.execute(source, destination);
+
+		context.close();
 	}
 
 }

@@ -3,6 +3,7 @@ package it.albertus.storage;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 
 /**
  * Interfaccia che rappresenta un sistema di storage indipendentemente
@@ -43,5 +44,22 @@ public interface FileStorage {
 	 *         destinazione.
 	 */
 	void downloadToFile(String sourceFileName, String destinationPathFileName) throws FileStorageException, FileNotFoundException, IOException;
+
+	/**
+	 * Scarica direttamente in locale un file memorizzato sullo storage.
+	 * 
+	 * @param sourceFileName il nome del file memorizzato sullo storage da
+	 *        scaricare.
+	 * 
+	 * @param outputStream lo stream in cui scaricare il file.
+	 * 
+	 * @throws FileStorageException in caso di errori durante il recupero del
+	 *         file dallo storage.
+	 * @throws FileNotFoundException se il file richiesto non &egrave; presente
+	 *         sullo storage.
+	 * @throws IOException in caso di errore nella creazione del file di
+	 *         destinazione.
+	 */
+	void downloadToStream(String sourceFileName, OutputStream outputStream) throws FileStorageException, FileNotFoundException, IOException;
 
 }

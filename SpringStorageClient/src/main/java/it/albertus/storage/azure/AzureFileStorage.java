@@ -6,6 +6,7 @@ import it.albertus.storage.FileStorageException;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.URISyntaxException;
 import java.security.InvalidKeyException;
 import java.util.Iterator;
@@ -58,6 +59,21 @@ public class AzureFileStorage implements FileStorage {
 		try {
 			blob.downloadToFile(destinationPathFileName);
 			logger.debug("File \"" + sourceFileName + "\" scaricato da Azure in \"" + destinationPathFileName + "\"");
+		}
+		catch (StorageException se) {
+			final String message = "Impossibile scaricare il file " + sourceFileName + ": errore del servizio di storage";
+			logger.error(message + " - " + se.toString());
+			throw new FileStorageException(message, se);
+		}
+	}
+
+	@Override
+	public void downloadToStream(final String sourceFileName, final OutputStream outputStream) throws FileStorageException, FileNotFoundException {
+		CloudBlob blob = getBlobFromCloud(sourceFileName);
+
+		try {
+			blob.download(outputStream);
+			logger.debug("File \"" + sourceFileName + "\" scaricato da Azure in \"" + outputStream + "\"");
 		}
 		catch (StorageException se) {
 			final String message = "Impossibile scaricare il file " + sourceFileName + ": errore del servizio di storage";
