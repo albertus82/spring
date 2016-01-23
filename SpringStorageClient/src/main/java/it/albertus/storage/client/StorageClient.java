@@ -3,6 +3,7 @@ package it.albertus.storage.client;
 import it.albertus.storage.FileStorage;
 
 import java.io.BufferedOutputStream;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -36,6 +37,12 @@ public class StorageClient {
 	}
 
 	public void execute(String source, String destination) {
+		/* Creazione directory se non presenti */
+		File parent = new File(destination).getParentFile();
+		if (parent != null) {
+			parent.mkdirs();
+		}
+
 		try {
 			/* Scaricamento diretto su file */
 			fileStorage.downloadToFile(source, destination);
