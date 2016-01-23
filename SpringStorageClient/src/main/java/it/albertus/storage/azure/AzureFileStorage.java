@@ -23,7 +23,14 @@ import com.microsoft.azure.storage.blob.CloudBlobClient;
 import com.microsoft.azure.storage.blob.CloudBlobContainer;
 import com.microsoft.azure.storage.blob.ListBlobItem;
 
-/** Interfacciamento con la libreria di Microsoft Azure Storage. */
+/**
+ * Interfacciamento con la libreria di Microsoft Azure Storage.
+ * 
+ * In un Azure Blob Container non esistono directory, ma il separatore
+ * <code>'/'</code> (o equivalentemente <code>'\'</code>) pu&ograve; essere
+ * usato nei nomi dei file per simulare a tutti gli effetti la presenza di una
+ * struttura di directory.
+ */
 @Component
 public class AzureFileStorage implements FileStorage {
 
