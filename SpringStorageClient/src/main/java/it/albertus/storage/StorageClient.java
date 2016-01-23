@@ -10,6 +10,7 @@ import javax.annotation.PostConstruct;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Required;
 
 public class StorageClient {
 
@@ -20,6 +21,7 @@ public class StorageClient {
 	private FileStorage fileStorage;
 
 	/* Iniezione */
+	@Required
 	public void setFileStorage(FileStorage fileStorage) {
 		this.fileStorage = fileStorage;
 	}
