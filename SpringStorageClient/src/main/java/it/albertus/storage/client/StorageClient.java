@@ -1,4 +1,6 @@
-package it.albertus.storage;
+package it.albertus.storage.client;
+
+import it.albertus.storage.FileStorage;
 
 import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;

@@ -1,4 +1,4 @@
-package it.albertus.storage;
+package it.albertus.storage.client;
 
 import it.albertus.storage.config.SpringContext;
 
