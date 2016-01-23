@@ -13,7 +13,8 @@ public interface FileStorage {
 
 	/**
 	 * Fornisce un {@link java.io.InputStream InputStream} che punta ad un file
-	 * memorizzato sullo storage.
+	 * memorizzato sullo storage. <b>Tale stream dovr&agrave; essere
+	 * esplicitamente chiuso al termine delle operazioni di lettura.</b>
 	 * 
 	 * @param sourceFileName il nome del file memorizzato sullo storage.
 	 * 
@@ -51,7 +52,9 @@ public interface FileStorage {
 	 * @param sourceFileName il nome del file memorizzato sullo storage da
 	 *        scaricare.
 	 * 
-	 * @param outputStream lo stream in cui scaricare il file.
+	 * @param outputStream lo stream in cui scaricare il file. <b>Tale stream
+	 *        dovr&agrave; essere esplicitamente chiuso al termine delle
+	 *        operazioni di scrittura.</b>
 	 * 
 	 * @throws FileStorageException in caso di errori durante il recupero del
 	 *         file dallo storage.
