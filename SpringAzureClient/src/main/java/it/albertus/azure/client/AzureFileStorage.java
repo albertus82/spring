@@ -25,10 +25,10 @@ public class AzureFileStorage implements FileStorage {
 
 	private static final Log logger = LogFactory.getLog(AzureFileStorage.class);
 
-	@Value("${azure.storageConnectionString}")
+	@Value("${storage.azure.connectionString}")
 	private String storageConnectionString;
 
-	@Value("${azure.containerName}")
+	@Value("${storage.azure.containerName}")
 	private String containerName;
 
 	public InputStream downloadAsStream(final String sourceFileName) throws FileStorageException, FileNotFoundException {

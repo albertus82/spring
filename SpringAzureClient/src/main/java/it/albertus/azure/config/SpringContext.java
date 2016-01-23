@@ -8,7 +8,7 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 
 @Configuration
 @ComponentScan(basePackages = "it.albertus.azure")
-@PropertySource({ "file:/azure.properties" })
+@PropertySource({ "classpath:configuration.properties", "${storage.properties}" })
 public class SpringContext {
 
 	/* Abilita la risoluzione dei segnaposti ${...} nelle annotation @Value */
