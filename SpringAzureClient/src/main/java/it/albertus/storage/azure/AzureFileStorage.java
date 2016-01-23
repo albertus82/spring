@@ -1,4 +1,7 @@
-package it.albertus.azure.client;
+package it.albertus.storage.azure;
+
+import it.albertus.storage.FileStorage;
+import it.albertus.storage.FileStorageException;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -31,6 +34,7 @@ public class AzureFileStorage implements FileStorage {
 	@Value("${storage.azure.containerName}")
 	private String containerName;
 
+	@Override
 	public InputStream downloadAsStream(final String sourceFileName) throws FileStorageException, FileNotFoundException {
 		CloudBlob blob = getBlobFromCloud(sourceFileName);
 
@@ -47,6 +51,7 @@ public class AzureFileStorage implements FileStorage {
 		return is;
 	}
 
+	@Override
 	public void downloadToFile(final String sourceFileName, final String destinationPathFileName) throws FileStorageException, FileNotFoundException, IOException {
 		CloudBlob blob = getBlobFromCloud(sourceFileName);
 

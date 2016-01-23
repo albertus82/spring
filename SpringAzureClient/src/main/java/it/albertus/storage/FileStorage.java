@@ -1,4 +1,4 @@
-package it.albertus.azure.client;
+package it.albertus.storage;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

@@ -1,7 +1,6 @@
-package it.albertus.azure;
+package it.albertus.storage;
 
-import it.albertus.azure.client.FileStorage;
-import it.albertus.azure.config.SpringContext;
+import it.albertus.storage.config.SpringContext;
 
 import java.io.IOException;
 
@@ -9,7 +8,7 @@ import org.apache.commons.io.IOUtils;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-public class AzureClientLauncher {
+public class StorageClientLauncher {
 
 	public static void main(String[] args) {
 		if (args.length != 2 || args[0].trim().length() == 0 || args[1].trim().length() == 0) {
