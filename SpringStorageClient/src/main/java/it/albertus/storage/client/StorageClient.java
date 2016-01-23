@@ -29,6 +29,7 @@ public class StorageClient {
 		this.fileStorage = fileStorage;
 	}
 
+	/* Verifica iniezione */
 	@PostConstruct
 	private void afterPropertiesSet() {
 		if (null == fileStorage) {
