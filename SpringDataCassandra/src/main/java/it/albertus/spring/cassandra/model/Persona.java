@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.UUID;
 
 import org.springframework.cassandra.core.PrimaryKeyType;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.cassandra.mapping.Column;
 import org.springframework.data.cassandra.mapping.PrimaryKeyColumn;
 import org.springframework.data.cassandra.mapping.Table;
@@ -13,6 +14,10 @@ import org.springframework.data.cassandra.mapping.Table;
 public class Persona implements Serializable {
 
 	private static final long serialVersionUID = 8083377623405711312L;
+
+	@Column("ROW_CREATED_DTTM")
+	@CreatedDate
+	private Date dataCreazione;
 
 	@PrimaryKeyColumn(name = "CODI_PERSONA", ordinal = 0, type = PrimaryKeyType.PARTITIONED)
 	private UUID id;
@@ -80,9 +85,17 @@ public class Persona implements Serializable {
 		this.peso = peso;
 	}
 
+	public Date getDataCreazione() {
+		return dataCreazione;
+	}
+
+	public void setDataCreazione(Date dataCreazione) {
+		this.dataCreazione = dataCreazione;
+	}
+
 	@Override
 	public String toString() {
-		return "Persona [id=" + id + ", cognome=" + cognome + ", nome=" + nome + ", dataNascita=" + dataNascita + ", altezza=" + altezza + ", peso=" + peso + "]";
+		return "Persona [dataCreazione=" + dataCreazione + ", id=" + id + ", cognome=" + cognome + ", nome=" + nome + ", dataNascita=" + dataNascita + ", altezza=" + altezza + ", peso=" + peso + "]";
 	}
 
 	@Override
