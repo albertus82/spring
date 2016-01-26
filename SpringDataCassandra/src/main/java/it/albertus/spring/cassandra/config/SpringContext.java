@@ -1,7 +1,11 @@
 package it.albertus.spring.cassandra.config;
 
-import it.albertus.spring.cassandra.dao.TestSpringDataCassandraDao;
-import it.albertus.spring.cassandra.model.TestSpringDataCassandra;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.UUID;
+
+import it.albertus.spring.cassandra.dao.PersonaDao;
+import it.albertus.spring.cassandra.model.Persona;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,25 +33,35 @@ public class SpringContext {
 
 	private static final Logger log = LoggerFactory.getLogger(SpringContext.class);
 
-	public static void main(String... args) {
+	public static void main(String... args) throws ParseException {
 		ConfigurableApplicationContext context = new AnnotationConfigApplicationContext(SpringContext.class);
 		log.info("Inizio esecuzione.");
 
 		Session session = (Session) context.getBean("cassandraSession");
 		session.execute("CREATE KEYSPACE IF NOT EXISTS alb_space WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : 1 }");
-		session.execute("CREATE TABLE IF NOT EXISTS d_test_spring_data_cassandra (sequ_test int primary key, text_stringa text)");
+
+		session.execute("CREATE TABLE IF NOT EXISTS d_persone (codi_persona uuid primary key, " +
+		                                                      "text_cognome text, " +
+		                                                      "text_nome text, " +
+		                                                      "data_nascita timestamp, " +
+		                                                      "nume_altezza int, " +
+		                                                      "nume_peso int)");
 
 		/* INSERT... */
-		TestSpringDataCassandra test = new TestSpringDataCassandra();
-		test.setTesto("Stringa di prova");
-		test.setId(12345);
-		TestSpringDataCassandraDao repo = context.getBean(TestSpringDataCassandraDao.class);
-		repo.save(test);
+		Persona persona = new Persona();
+		persona.setCognome("Rossi");
+		persona.setNome("Mario");
+		persona.setDataNascita(new SimpleDateFormat("dd/MM/yyyy").parse("01/07/1950"));
+		persona.setAltezza(170);
+		persona.setPeso(70);
+		persona.setId(UUID.randomUUID());
+		PersonaDao dao = context.getBean(PersonaDao.class);
+		dao.save(persona);
 
 		/* SELECT... */
-		Iterable<TestSpringDataCassandra> righe = repo.findAll();
-		System.out.println("Elenco degli oggetti:");
-		for (TestSpringDataCassandra riga : righe) {
+		Iterable<Persona> righe = dao.findAll();
+		System.out.println("Elenco persone:");
+		for (Persona riga : righe) {
 			System.out.println(riga.toString());
 		}
 
