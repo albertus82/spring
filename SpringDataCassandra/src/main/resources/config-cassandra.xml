@@ -1,0 +1,22 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:cassandra="http://www.springframework.org/schema/data/cassandra"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/cql http://www.springframework.org/schema/data/current/spring-cql.xsd
+	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/data/cassandra http://www.springframework.org/schema/data/cassandra/spring-cassandra.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<cassandra:cluster id="cassandraCluster" contact-points="${cassandra.cluster.contactPoints}" port="${cassandra.cluster.port}" />
+
+	<cassandra:converter />
+
+	<cassandra:session id="cassandraSession" cluster-ref="cassandraCluster" keyspace-name="${cassandra.session.keyspaceName}" />
+
+	<cassandra:template id="cqlTemplate" />
+
+	<cassandra:repositories base-package="it.albertus.spring.cassandra.dao" />
+
+	<cassandra:mapping entity-base-packages="it.albertus.spring.cassandra.model" />
+
+</beans>
