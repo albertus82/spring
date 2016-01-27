@@ -5,6 +5,7 @@
 
 	<bean id="storageClient" class="it.albertus.storage.client.StorageClient">
 		<property name="fileStorage" ref="azureFileStorage" />
+		<!-- <property name="fileStorage" ref="localFileStorage" /> -->
 	</bean>
 
 </beans>

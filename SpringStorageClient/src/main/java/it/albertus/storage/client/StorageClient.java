@@ -78,7 +78,7 @@ public class StorageClient {
 
 			/* Caricamento tramite InputStream */
 			BufferedInputStream is = new BufferedInputStream(new FileInputStream(source));
-			fileStorage.uploadAsStream(is, "inputstream_" + destination);
+			fileStorage.uploadAsStream(is, destination + ".bis");
 			is.close();
 		}
 		catch (IOException e) {

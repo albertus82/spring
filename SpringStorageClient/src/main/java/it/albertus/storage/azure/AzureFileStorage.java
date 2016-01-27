@@ -42,7 +42,7 @@ public class AzureFileStorage implements FileStorage {
 
 	@Value("${storage.azure.containerName}")
 	private String containerName;
-	
+
 	@Override
 	public boolean exists(final String fileName) throws FileStorageException {
 		CloudBlobContainer container = getBlobContainerFromCloud();
@@ -61,13 +61,14 @@ public class AzureFileStorage implements FileStorage {
 			throw new FileStorageException(message, se);
 		}
 	}
-	
+
 	@Override
 	public void uploadFromFile(final String sourcePathFileName, final String destinationFileName) throws FileStorageException, IOException {
 		CloudBlobContainer container = getBlobContainerFromCloud();
 		try {
 			final CloudBlockBlob blob = getUploadBlobReference(destinationFileName, container);
 			blob.uploadFromFile(sourcePathFileName);
+			logger.debug("File \"" + sourcePathFileName + "\" caricato su Azure in \"" + destinationFileName + "\"");
 		}
 		catch (URISyntaxException use) {
 			final String message = "Nome file destinazione \"" + destinationFileName + "\" non valido per il container \"" + containerName + '"';
@@ -80,13 +81,14 @@ public class AzureFileStorage implements FileStorage {
 			throw new FileStorageException(message, se);
 		}
 	}
-	
+
 	@Override
 	public void uploadAsStream(final InputStream inputStream, final String destinationFileName) throws FileStorageException, IOException {
 		CloudBlobContainer container = getBlobContainerFromCloud();
 		try {
 			final CloudBlockBlob blob = getUploadBlobReference(destinationFileName, container);
 			blob.upload(inputStream, -1);
+			logger.debug("File \"" + inputStream + "\" caricato su Azure in \"" + destinationFileName + "\"");
 		}
 		catch (URISyntaxException use) {
 			final String message = "Nome file destinazione \"" + destinationFileName + "\" non valido per il container \"" + containerName + '"';
@@ -104,7 +106,7 @@ public class AzureFileStorage implements FileStorage {
 		final CloudBlockBlob blob = container.getBlockBlobReference(destinationFileName);
 		final boolean exists = blob.exists();
 		if (exists) {
-			logger.warn("Il Blob "+ destinationFileName + " esiste gia' sul Cloud Storage. Si procede in sovrascrittura.");
+			logger.warn("Il Blob \""+ destinationFileName + "\" esiste gia' su Azure. Si procede in sovrascrittura!");
 		}
 		return blob;
 	}

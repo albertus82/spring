@@ -65,10 +65,58 @@ public interface FileStorage {
 	 */
 	void downloadToStream(String sourceFileName, OutputStream outputStream) throws FileStorageException, FileNotFoundException, IOException;
 
+	/**
+	 * Carica un file memorizzato in locale direttamente sullo storage.
+	 * 
+	 * @param sourcePathFileName il nome del file da caricare, comprensivo del
+	 *        percorso.
+	 * @param destinationFileName il nome del file che sar&agrave; memorizzato
+	 *        sullo storage. <b>Se tale nome &egrave; gi&agrave; presente sullo
+	 *        storage, il relativo file sar&agrave; sovrascritto.</b> Utilizzare
+	 *        il metodo {@link #exists(String)} per accertarsi che il file non
+	 *        sia gi&agrave; presente.
+	 * 
+	 * @throws FileStorageException in caso di errori durante l'accesso allo
+	 *         storage.
+	 * @throws IOException in caso di errore nella creazione del file di
+	 *         destinazione.
+	 */
 	void uploadFromFile(String sourcePathFileName, String destinationFileName) throws FileStorageException, IOException;
 
+	/**
+	 * Carica un file sullo storage a partire da un {@link java.io.InputStream
+	 * InputStream}.
+	 * 
+	 * @param inputStream lo stream da cui leggere i dati da trasferire sullo
+	 *        storage.
+	 * @param destinationFileName il nome del file che sar&agrave; memorizzato
+	 *        sullo storage. <b>Se tale nome &egrave; gi&agrave; presente sullo
+	 *        storage, il relativo file sar&agrave; sovrascritto.</b> Utilizzare
+	 *        il metodo {@link #exists(String)} per accertarsi che il file non
+	 *        sia gi&agrave; presente.
+	 * 
+	 * @throws FileStorageException in caso di errori durante l'accesso allo
+	 *         storage.
+	 * @throws IOException in caso di errore nella creazione del file di
+	 *         destinazione.
+	 */
 	void uploadAsStream(InputStream inputStream, String destinationFileName) throws FileStorageException, IOException;
 
+	/**
+	 * Verifica l'esistenza di un file sullo storage. &Egrave; possibile
+	 * utilizzare questo metodo per evitare di sovrascrivere inavvertitamente un
+	 * file sullo storage, tenendo conto che comunque, tra il controllo di
+	 * esistenza e l'effettiva scrittura, potrebbe teoricamente essere mutato lo
+	 * stato dello storage.
+	 * 
+	 * @param fileName il nome del file di cui verificare l'esistenza.
+	 * 
+	 * @return <code>true</code> se il file &egrave; presente sullo storage,
+	 *         <code>false</code> altrimenti.
+	 * 
+	 * @throws FileStorageException in caso di errori durante l'accesso allo
+	 *         storage.
+	 */
 	boolean exists(String fileName) throws FileStorageException;
 
 }

@@ -49,20 +49,22 @@ public class LocalFileStorage implements FileStorage {
 
 	@Override
 	public void uploadFromFile(String sourcePathFileName, String destinationFileName) throws IOException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public boolean exists(String fileName) throws FileStorageException {
-		// TODO Auto-generated method stub
-		return false;
+		InputStream is = new BufferedInputStream(new FileInputStream(sourcePathFileName));
+		uploadAsStream(is, destinationFileName);
+		is.close();
 	}
 
 	@Override
 	public void uploadAsStream(InputStream inputStream, String destinationFileName) throws FileStorageException, IOException {
-		// TODO Auto-generated method stub
-		
+		BufferedOutputStream os = new BufferedOutputStream(new FileOutputStream(sourcePath + File.separatorChar + destinationFileName));
+		IOUtils.copy(inputStream, os);
+		os.close();
+	}
+
+	@Override
+	public boolean exists(String fileName) throws FileStorageException {
+		File file = new File(sourcePath + File.separatorChar + fileName);
+		return file.exists();
 	}
 
 }
