@@ -119,4 +119,17 @@ public interface FileStorage {
 	 */
 	boolean exists(String fileName) throws FileStorageException;
 
+	/**
+	 * <b>Cancella</b> un file dallo storage. L'operazione non &egrave; annullabile.
+	 * 
+	 * @param fileName il nome del file da cancellare
+	 * 
+	 * @return <code>true</code> se il file &egrave; stato effettivamente
+	 *         cancellato, <code>false</code> altrimenti.
+	 * 
+	 * @throws FileStorageException in caso di errori durante l'accesso allo
+	 *         storage.
+	 */
+	boolean delete(String fileName) throws FileStorageException;
+
 }

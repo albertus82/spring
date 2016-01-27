@@ -11,6 +11,8 @@ import java.net.URISyntaxException;
 import java.security.InvalidKeyException;
 import java.util.Iterator;
 
+import javax.activation.MimetypesFileTypeMap;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -44,6 +46,27 @@ public class AzureFileStorage implements FileStorage {
 	private String containerName;
 
 	@Override
+	public boolean delete(final String fileName) throws FileStorageException {
+		CloudBlobContainer container = getBlobContainerFromCloud();
+		try {
+			CloudBlockBlob blob = container.getBlockBlobReference(fileName);
+			final boolean deleted = blob.deleteIfExists();
+			logger.info("File \"" + fileName + "\" cancellato da Azure (container " + containerName + ")");
+			return deleted;
+		}
+		catch (URISyntaxException use) {
+			final String message = "Nome file \"" + fileName + "\" non valido per il container \"" + containerName + '"';
+			logger.error(message + " - " + use.toString());
+			throw new FileStorageException(message, use);
+		}
+		catch (StorageException se) {
+			final String message = "Impossibile cancellare il file " + fileName + ": errore del servizio di storage";
+			logger.error(message + " - " + se.toString());
+			throw new FileStorageException(message, se);
+		}
+	}
+
+	@Override
 	public boolean exists(final String fileName) throws FileStorageException {
 		CloudBlobContainer container = getBlobContainerFromCloud();
 		try {
@@ -67,6 +90,7 @@ public class AzureFileStorage implements FileStorage {
 		CloudBlobContainer container = getBlobContainerFromCloud();
 		try {
 			final CloudBlockBlob blob = getUploadBlobReference(destinationFileName, container);
+			setBlobContentType(blob, destinationFileName);
 			blob.uploadFromFile(sourcePathFileName);
 			logger.debug("File \"" + sourcePathFileName + "\" caricato su Azure in \"" + destinationFileName + "\"");
 		}
@@ -87,6 +111,7 @@ public class AzureFileStorage implements FileStorage {
 		CloudBlobContainer container = getBlobContainerFromCloud();
 		try {
 			final CloudBlockBlob blob = getUploadBlobReference(destinationFileName, container);
+			setBlobContentType(blob, destinationFileName);
 			blob.upload(inputStream, -1);
 			logger.debug("File \"" + inputStream + "\" caricato su Azure in \"" + destinationFileName + "\"");
 		}
@@ -109,6 +134,28 @@ public class AzureFileStorage implements FileStorage {
 			logger.warn("Il Blob \""+ destinationFileName + "\" esiste gia' su Azure. Si procede in sovrascrittura!");
 		}
 		return blob;
+	}
+
+	private void setBlobContentType(final CloudBlockBlob blob, final String fileName) {
+		/* Perche' Microsoft non fa questa cosa automaticamente? */
+		try {
+			int index = fileName.indexOf('.');
+			if (index != -1) {
+				final String extension = fileName.substring(index).toLowerCase();
+				if (".xbrl".equals(extension)) {
+					blob.getProperties().setContentType("application/xml");
+				}
+				else if (".zip".equals(extension)) {
+					blob.getProperties().setContentType("application/zip");
+				}				
+				else {
+					blob.getProperties().setContentType(new MimetypesFileTypeMap().getContentType(fileName));
+				}
+			}
+		}
+		catch (RuntimeException re) {
+			logger.warn("Impossibile determinare il Content Type per il file \"" + fileName + "\" - " + re.toString());
+		}
 	}
 
 	@Override

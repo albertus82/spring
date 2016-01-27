@@ -86,4 +86,14 @@ public class StorageClient {
 		}
 	}
 
+	public void delete(String fileName) {
+		try {
+			final boolean deleted = fileStorage.delete(fileName);
+			System.out.println("File \"" + fileName + (deleted ? " " : " non ") + "cancellato.");
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
 }
