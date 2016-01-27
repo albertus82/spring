@@ -18,7 +18,7 @@ import com.datastax.driver.core.Session;
 public class EsempioPersona implements InitializingBean {
 
 	private enum NomePersona {
-		Mario, Paolo, Giorgio, Vittorio;
+		Mario, Giorgio, Paolo, Vittorio;
 	}
 
 	private enum CognomePersona {
