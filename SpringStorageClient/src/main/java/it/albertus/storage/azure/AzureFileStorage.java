@@ -21,6 +21,7 @@ import com.microsoft.azure.storage.StorageException;
 import com.microsoft.azure.storage.blob.CloudBlob;
 import com.microsoft.azure.storage.blob.CloudBlobClient;
 import com.microsoft.azure.storage.blob.CloudBlobContainer;
+import com.microsoft.azure.storage.blob.CloudBlockBlob;
 import com.microsoft.azure.storage.blob.ListBlobItem;
 
 /**
@@ -41,6 +42,72 @@ public class AzureFileStorage implements FileStorage {
 
 	@Value("${storage.azure.containerName}")
 	private String containerName;
+	
+	@Override
+	public boolean exists(final String fileName) throws FileStorageException {
+		CloudBlobContainer container = getBlobContainerFromCloud();
+		try {
+			CloudBlockBlob blob = container.getBlockBlobReference(fileName);
+			return blob.exists();
+		}
+		catch (URISyntaxException use) {
+			final String message = "Nome file \"" + fileName + "\" non valido per il container \"" + containerName + '"';
+			logger.error(message + " - " + use.toString());
+			throw new FileStorageException(message, use);
+		}
+		catch (StorageException se) {
+			final String message = "Impossibile verificare l'esistenza del file " + fileName + ": errore del servizio di storage";
+			logger.error(message + " - " + se.toString());
+			throw new FileStorageException(message, se);
+		}
+	}
+	
+	@Override
+	public void uploadFromFile(final String sourcePathFileName, final String destinationFileName) throws FileStorageException, IOException {
+		CloudBlobContainer container = getBlobContainerFromCloud();
+		try {
+			final CloudBlockBlob blob = getUploadBlobReference(destinationFileName, container);
+			blob.uploadFromFile(sourcePathFileName);
+		}
+		catch (URISyntaxException use) {
+			final String message = "Nome file destinazione \"" + destinationFileName + "\" non valido per il container \"" + containerName + '"';
+			logger.error(message + " - " + use.toString());
+			throw new FileStorageException(message, use);
+		}
+		catch (StorageException se) {
+			final String message = "Impossibile caricare il file " + sourcePathFileName + ": errore del servizio di storage";
+			logger.error(message + " - " + se.toString());
+			throw new FileStorageException(message, se);
+		}
+	}
+	
+	@Override
+	public void uploadAsStream(final InputStream inputStream, final String destinationFileName) throws FileStorageException, IOException {
+		CloudBlobContainer container = getBlobContainerFromCloud();
+		try {
+			final CloudBlockBlob blob = getUploadBlobReference(destinationFileName, container);
+			blob.upload(inputStream, -1);
+		}
+		catch (URISyntaxException use) {
+			final String message = "Nome file destinazione \"" + destinationFileName + "\" non valido per il container \"" + containerName + '"';
+			logger.error(message + " - " + use.toString());
+			throw new FileStorageException(message, use);
+		}
+		catch (StorageException se) {
+			final String message = "Impossibile caricare lo stream " + inputStream + ": errore del servizio di storage";
+			logger.error(message + " - " + se.toString());
+			throw new FileStorageException(message, se);
+		}
+	}
+
+	private CloudBlockBlob getUploadBlobReference(final String destinationFileName, CloudBlobContainer container) throws URISyntaxException, StorageException {
+		final CloudBlockBlob blob = container.getBlockBlobReference(destinationFileName);
+		final boolean exists = blob.exists();
+		if (exists) {
+			logger.warn("Il Blob "+ destinationFileName + " esiste gia' sul Cloud Storage. Si procede in sovrascrittura.");
+		}
+		return blob;
+	}
 
 	@Override
 	public InputStream downloadAsStream(final String sourceFileName) throws FileStorageException, FileNotFoundException {
@@ -90,11 +157,16 @@ public class AzureFileStorage implements FileStorage {
 	}
 
 	private CloudBlob getBlobFromCloud(final String fileName) throws FileStorageException, FileNotFoundException {
+		CloudBlobContainer container = getBlobContainerFromCloud();
+		CloudBlob blob = getBlob(fileName, container);
+		return blob;
+	}
+
+	private CloudBlobContainer getBlobContainerFromCloud() throws FileStorageException {
 		CloudStorageAccount storageAccount = getStorageAccount();
 		CloudBlobClient blobClient = getBlobClient(storageAccount);
 		CloudBlobContainer container = getBlobContainer(blobClient);
-		CloudBlob blob = getBlob(fileName, container);
-		return blob;
+		return container;
 	}
 
 	private CloudBlob getBlob(final String fileName, final CloudBlobContainer container) throws FileStorageException, FileNotFoundException {

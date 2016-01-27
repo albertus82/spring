@@ -65,4 +65,10 @@ public interface FileStorage {
 	 */
 	void downloadToStream(String sourceFileName, OutputStream outputStream) throws FileStorageException, FileNotFoundException, IOException;
 
+	void uploadFromFile(String sourcePathFileName, String destinationFileName) throws FileStorageException, IOException;
+
+	void uploadAsStream(InputStream inputStream, String destinationFileName) throws FileStorageException, IOException;
+
+	boolean exists(String fileName) throws FileStorageException;
+
 }

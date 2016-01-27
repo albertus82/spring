@@ -2,8 +2,10 @@ package it.albertus.storage.client;
 
 import it.albertus.storage.FileStorage;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -37,7 +39,7 @@ public class StorageClient {
 		}
 	}
 
-	public void execute(String source, String destination) {
+	public void download(String source, String destination) {
 		/* Creazione directory se non presenti */
 		File parent = new File(destination).getParentFile();
 		if (parent != null) {
@@ -60,6 +62,24 @@ public class StorageClient {
 			BufferedOutputStream os = new BufferedOutputStream(new FileOutputStream(destination + ".bis"));
 			fileStorage.downloadToStream(source, os);
 			os.close();
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void upload(String source, String destination) {
+		try {
+			/* Controllo esistenza file */
+			System.out.println("Il file \"" + destination + "\" esiste gia'? " + (fileStorage.exists(destination) ? "Si'" : "No"));
+
+			/* Caricamento diretto da file */
+			fileStorage.uploadFromFile(source, destination);
+
+			/* Caricamento tramite InputStream */
+			BufferedInputStream is = new BufferedInputStream(new FileInputStream(source));
+			fileStorage.uploadAsStream(is, "inputstream_" + destination);
+			is.close();
 		}
 		catch (IOException e) {
 			e.printStackTrace();

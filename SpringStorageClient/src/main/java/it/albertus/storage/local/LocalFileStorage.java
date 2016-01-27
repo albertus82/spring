@@ -1,6 +1,7 @@
 package it.albertus.storage.local;
 
 import it.albertus.storage.FileStorage;
+import it.albertus.storage.FileStorageException;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -44,6 +45,24 @@ public class LocalFileStorage implements FileStorage {
 		IOUtils.copy(is, outputStream);
 		is.close();
 		outputStream.flush();
+	}
+
+	@Override
+	public void uploadFromFile(String sourcePathFileName, String destinationFileName) throws IOException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean exists(String fileName) throws FileStorageException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void uploadAsStream(InputStream inputStream, String destinationFileName) throws FileStorageException, IOException {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
