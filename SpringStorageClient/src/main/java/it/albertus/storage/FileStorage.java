@@ -111,8 +111,8 @@ public interface FileStorage {
 	 * 
 	 * @param fileName il nome del file di cui verificare l'esistenza.
 	 * 
-	 * @return <code>true</code> se il file &egrave; presente sullo storage,
-	 *         <code>false</code> altrimenti.
+	 * @return <tt>true</tt> se il file &egrave; presente sullo storage,
+	 *         <tt>false</tt> altrimenti.
 	 * 
 	 * @throws FileStorageException in caso di errori durante l'accesso allo
 	 *         storage.
@@ -124,8 +124,8 @@ public interface FileStorage {
 	 * 
 	 * @param fileName il nome del file da cancellare
 	 * 
-	 * @return <code>true</code> se il file &egrave; stato effettivamente
-	 *         cancellato, <code>false</code> altrimenti.
+	 * @return <tt>true</tt> se il file &egrave; stato effettivamente
+	 *         cancellato, <tt>false</tt> altrimenti.
 	 * 
 	 * @throws FileStorageException in caso di errori durante l'accesso allo
 	 *         storage.

@@ -30,8 +30,8 @@ import com.microsoft.azure.storage.blob.ListBlobItem;
  * Interfacciamento con la libreria di Microsoft Azure Storage.
  * 
  * In un Azure Blob Container non esistono directory vere e proprie, tuttavia
- * nei nomi dei file pu&ograve; essere usato il separatore <code>'/'</code> (o
- * equivalentemente <code>'\'</code>) per simulare a tutti gli effetti la
+ * nei nomi dei file pu&ograve; essere usato il separatore <tt>'/'</tt> (o
+ * equivalentemente <tt>'\'</tt>) per simulare a tutti gli effetti la
  * presenza di una struttura di directory.
  */
 @Component
