@@ -43,7 +43,7 @@ public class EsempioPersona implements InitializingBean {
 
 		/* Creazione tabella */
 		cassandraSession.execute("CREATE TABLE IF NOT EXISTS d_persone (row_created_dttm TIMESTAMP, " +
-                                                                       "codi_persona UUID PRIMARY KEY, " +
+		                                                               "codi_persona UUID PRIMARY KEY, " +
 		                                                               "text_cognome TEXT, " +
 		                                                               "text_nome TEXT, " +
 		                                                               "data_nascita TIMESTAMP, " +
