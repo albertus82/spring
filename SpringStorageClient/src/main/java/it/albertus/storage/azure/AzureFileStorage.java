@@ -13,6 +13,7 @@ import java.util.Iterator;
 
 import javax.activation.MimetypesFileTypeMap;
 
+import org.apache.commons.io.FileExistsException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -44,6 +45,9 @@ public class AzureFileStorage implements FileStorage {
 
 	@Value("${storage.azure.containerName}")
 	private String containerName;
+
+	@Value("${storage.azure.overwrite:false}")
+	private boolean overwrite;
 
 	@Override
 	public boolean delete(final String fileName) throws FileStorageException {
@@ -127,11 +131,16 @@ public class AzureFileStorage implements FileStorage {
 		}
 	}
 
-	private CloudBlockBlob getUploadBlobReference(final String destinationFileName, CloudBlobContainer container) throws URISyntaxException, StorageException {
+	private CloudBlockBlob getUploadBlobReference(final String destinationFileName, CloudBlobContainer container) throws URISyntaxException, StorageException, FileExistsException {
 		final CloudBlockBlob blob = container.getBlockBlobReference(destinationFileName);
 		final boolean exists = blob.exists();
 		if (exists) {
-			logger.warn("Il Blob \""+ destinationFileName + "\" esiste gia' su Azure. Si procede in sovrascrittura!");
+			if (overwrite) {
+				logger.warn("Il Blob \""+ destinationFileName + "\" esiste gia' su Azure. Si procede in sovrascrittura!");
+			}
+			else {
+				throw new FileExistsException("Il Blob \""+ destinationFileName + "\" esiste gia' su Azure. Sovrascrittura non consentita!");
+			}
 		}
 		return blob;
 	}

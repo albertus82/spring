@@ -17,8 +17,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 /**
- * Implementazione di {@link FileStorage} che preleva file da un file system
- * locale.
+ * Implementazione di {@link FileStorage} che opera su un file system locale.
  */
 @Component
 public class LocalFileStorage implements FileStorage {
