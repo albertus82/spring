@@ -148,7 +148,9 @@ public class AzureFileStorage implements FileStorage {
 				logger.warn("Il Blob \""+ destinationFileName + "\" esiste gia' su Azure. Si procede in sovrascrittura!");
 			}
 			else {
-				throw new FileExistsException("Il Blob \""+ destinationFileName + "\" esiste gia' su Azure. Sovrascrittura non consentita!");
+				final String message = "Il Blob \"" + destinationFileName + "\" esiste gia' su Azure. Sovrascrittura non consentita!";
+				logger.error(message);
+				throw new FileExistsException(message);
 			}
 		}
 		return blob;
