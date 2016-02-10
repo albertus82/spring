@@ -42,7 +42,7 @@ public class AzureFileStorage implements FileStorage {
 	private String containerName;
 	private boolean overwrite = false;
 
-	/* Inizio metori setter per iniezione */
+	/* Inizio metodi setter per iniezione */
 	@Required
 	public void setConnectionString(String connectionString) {
 		this.connectionString = connectionString;
