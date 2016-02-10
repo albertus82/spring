@@ -10,34 +10,17 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import javax.annotation.PostConstruct;
-
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.springframework.beans.factory.annotation.Required;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class StorageClient {
-
-	private static final Log logger = LogFactory.getLog(StorageClient.class);
 
 	private static final String lineSeparator = System.getProperty("line.separator");
 
+	@Autowired
 	private FileStorage fileStorage;
-
-	/* Iniezione */
-	@Required
-	public void setFileStorage(FileStorage fileStorage) {
-		this.fileStorage = fileStorage;
-	}
-
-	/* Verifica iniezione */
-	@PostConstruct
-	private void afterPropertiesSet() {
-		if (null == fileStorage) {
-			logger.fatal("FileStorage non inizializzato. Verificare la configurazione di Spring.");
-		}
-	}
 
 	public void download(String source, String destination) {
 		/* Creazione directory se non presenti */

@@ -16,8 +16,7 @@ import javax.activation.MimetypesFileTypeMap;
 import org.apache.commons.io.FileExistsException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Required;
 
 import com.microsoft.azure.storage.CloudStorageAccount;
 import com.microsoft.azure.storage.StorageException;
@@ -35,19 +34,29 @@ import com.microsoft.azure.storage.blob.ListBlobItem;
  * equivalentemente <tt>'\'</tt>) per simulare a tutti gli effetti la
  * presenza di una struttura di directory.
  */
-@Component
 public class AzureFileStorage implements FileStorage {
 
 	private static final Log logger = LogFactory.getLog(AzureFileStorage.class);
 
-	@Value("${storage.azure.connectionString}")
-	private String storageConnectionString;
-
-	@Value("${storage.azure.containerName}")
+	private String connectionString;
 	private String containerName;
+	private boolean overwrite = false;
 
-	@Value("${storage.azure.overwrite:false}")
-	private boolean overwrite;
+	/* Inizio metori setter per iniezione */
+	@Required
+	public void setConnectionString(String connectionString) {
+		this.connectionString = connectionString;
+	}
+
+	@Required
+	public void setContainerName(String containerName) {
+		this.containerName = containerName;
+	}
+
+	public void setOverwrite(boolean overwrite) {
+		this.overwrite = overwrite;
+	}
+	/* Fine metodi setter per iniezione */
 
 	@Override
 	public boolean delete(final String fileName) throws FileStorageException {
@@ -288,20 +297,20 @@ public class AzureFileStorage implements FileStorage {
 	}
 
 	private CloudStorageAccount getStorageAccount() throws FileStorageException {
-		logger.debug("Stringa di connessione ad Azure: \"" + storageConnectionString + "\"");
+		logger.debug("Stringa di connessione ad Azure: \"" + connectionString + "\"");
 
 		CloudStorageAccount storageAccount = null;
 		try {
-			storageAccount = CloudStorageAccount.parse(storageConnectionString);
+			storageAccount = CloudStorageAccount.parse(connectionString);
 			logger.debug("CloudStorageAccount: " + storageAccount);
 		}
 		catch (InvalidKeyException ike) {
-			final String message = "Chiave account Azure non valida. Stringa di connessione: " + storageConnectionString;
+			final String message = "Chiave account Azure non valida. Stringa di connessione: " + connectionString;
 			logger.error(message + " - " + ike.toString());
 			throw new FileStorageException(message, ike);
 		}
 		catch (URISyntaxException use) {
-			final String message = "Stringa di connessione Azure non valida: " + storageConnectionString;
+			final String message = "Stringa di connessione Azure non valida: " + connectionString;
 			logger.error(message + " - " + use.toString());
 			throw new FileStorageException(message, use);
 		}

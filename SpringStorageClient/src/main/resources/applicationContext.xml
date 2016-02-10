@@ -3,9 +3,14 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-	<bean id="storageClient" class="it.albertus.storage.client.StorageClient">
-		<property name="fileStorage" ref="azureFileStorage" />
-		<!-- <property name="fileStorage" ref="localFileStorage" /> -->
+	<bean id="azureFileStorage" class="it.albertus.storage.azure.AzureFileStorage">
+		<property name="connectionString" value="${storage.azure.connectionString}" />
+		<property name="containerName" value="${storage.azure.containerName}" />
+		<property name="overwrite" value="${storage.azure.overwrite:false}" />
 	</bean>
+
+	<!-- <bean id="localFileStorage" class="it.albertus.storage.local.LocalFileStorage">
+		<property name="basePath" value="${storage.local.path}" />
+	</bean> -->
 
 </beans>

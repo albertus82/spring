@@ -13,21 +13,23 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 import org.apache.commons.io.IOUtils;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Required;
 
 /**
  * Implementazione di {@link FileStorage} che opera su un file system locale.
  */
-@Component
 public class LocalFileStorage implements FileStorage {
 
-	@Value("${storage.local.path}")
-	private String sourcePath;
+	private String basePath;
+
+	@Required
+	public void setBasePath(String basePath) {
+		this.basePath = basePath;
+	}
 
 	@Override
 	public InputStream downloadAsStream(final String sourceFileName) throws FileNotFoundException {
-		return new BufferedInputStream(new FileInputStream(sourcePath + File.separatorChar + sourceFileName));
+		return new BufferedInputStream(new FileInputStream(basePath + File.separatorChar + sourceFileName));
 	}
 
 	@Override
@@ -54,20 +56,20 @@ public class LocalFileStorage implements FileStorage {
 
 	@Override
 	public void uploadAsStream(InputStream inputStream, String destinationFileName) throws IOException {
-		BufferedOutputStream os = new BufferedOutputStream(new FileOutputStream(sourcePath + File.separatorChar + destinationFileName));
+		BufferedOutputStream os = new BufferedOutputStream(new FileOutputStream(basePath + File.separatorChar + destinationFileName));
 		IOUtils.copy(inputStream, os);
 		os.close();
 	}
 
 	@Override
 	public boolean exists(String fileName) {
-		File file = new File(sourcePath + File.separatorChar + fileName);
+		File file = new File(basePath + File.separatorChar + fileName);
 		return file.exists();
 	}
 
 	@Override
 	public boolean delete(String fileName) {
-		File file = new File(sourcePath + File.separatorChar + fileName);
+		File file = new File(basePath + File.separatorChar + fileName);
 		return file.delete();
 	}
 
