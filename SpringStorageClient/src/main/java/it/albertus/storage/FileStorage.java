@@ -72,9 +72,8 @@ public interface FileStorage {
 	 *        percorso.
 	 * @param destinationFileName il nome del file che sar&agrave; memorizzato
 	 *        sullo storage. <b>Se tale nome &egrave; gi&agrave; presente sullo
-	 *        storage, il relativo file sar&agrave; sovrascritto.</b> Utilizzare
-	 *        il metodo {@link #exists(String)} per accertarsi che il file non
-	 *        sia gi&agrave; presente.
+	 *        storage, il relativo file potrebbe essere sovrascritto</b> o meno
+	 *        a seconda della configurazione della specifica implementazione.
 	 * 
 	 * @throws FileStorageException in caso di errori durante l'accesso allo
 	 *         storage.
@@ -91,9 +90,8 @@ public interface FileStorage {
 	 *        storage.
 	 * @param destinationFileName il nome del file che sar&agrave; memorizzato
 	 *        sullo storage. <b>Se tale nome &egrave; gi&agrave; presente sullo
-	 *        storage, il relativo file sar&agrave; sovrascritto.</b> Utilizzare
-	 *        il metodo {@link #exists(String)} per accertarsi che il file non
-	 *        sia gi&agrave; presente.
+	 *        storage, il relativo file potrebbe essere sovrascritto</b> o meno
+	 *        a seconda della configurazione della specifica implementazione.
 	 * 
 	 * @throws FileStorageException in caso di errori durante l'accesso allo
 	 *         storage.
