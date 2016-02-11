@@ -103,7 +103,7 @@ public interface FileStorage {
 	/**
 	 * Verifica l'esistenza di un file sullo storage. &Egrave; possibile
 	 * utilizzare questo metodo per evitare di sovrascrivere inavvertitamente un
-	 * file sullo storage, tenendo conto che comunque, tra il controllo di
+	 * file sullo storage ma occorre considerare che, tra il controllo di
 	 * esistenza e l'effettiva scrittura, potrebbe teoricamente essere mutato lo
 	 * stato dello storage.
 	 * 
