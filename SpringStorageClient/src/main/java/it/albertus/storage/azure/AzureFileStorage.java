@@ -9,7 +9,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URISyntaxException;
 import java.security.InvalidKeyException;
-import java.util.Iterator;
 
 import javax.activation.MimetypesFileTypeMap;
 
@@ -240,33 +239,22 @@ public class AzureFileStorage implements FileStorage {
 
 	private CloudBlob getBlob(final String fileName, final CloudBlobContainer container) throws FileStorageException, FileNotFoundException {
 		CloudBlob blob = null;
-
-		Iterator<ListBlobItem> it = container.listBlobs(fileName).iterator();
-		if (it.hasNext()) {
-			ListBlobItem blobItem = it.next();
-			if (it.hasNext()) {
-				final String message = "Nome file incompleto, non valido o ambiguo: " + fileName;
-				logger.error(message);
-				throw new FileNotFoundException(message);
-			}
+		for (final ListBlobItem blobItem : container.listBlobs(fileName)) {
 			try {
 				if (blobItem instanceof CloudBlob && ((CloudBlob) blobItem).getName().equals(fileName)) {
 					blob = (CloudBlob) blobItem;
-				}
-				else {
-					final String message = "File non trovato: " + fileName + "; individuata directory omonima.";
-					logger.error(message);
-					throw new FileNotFoundException(message);
+					logger.info("File trovato: \"" + blob.getName() + '"');
+					break;
 				}
 			}
 			catch (URISyntaxException use) {
-				final String message = "Nome risorsa non valido: " + fileName;
+				final String message = "Nome risorsa non valido: \"" + fileName + '"';
 				logger.error(message);
 				throw new FileStorageException(message, use);
 			}
 		}
-		else {
-			final String message = "File non trovato: " + fileName;
+		if (null == blob) {
+			final String message = "File non trovato: \"" + fileName + '"';
 			logger.error(message);
 			throw new FileNotFoundException(message);
 		}
@@ -280,7 +268,7 @@ public class AzureFileStorage implements FileStorage {
 			logger.debug("CloudBlobContainer: " + container);
 		}
 		catch (URISyntaxException use) {
-			final String message = "Nome container non valido: " + containerName;
+			final String message = "Nome container non valido: \"" + containerName + '"';
 			logger.error(message + " - " + use.toString());
 			throw new FileStorageException(message, use);
 		}
@@ -307,12 +295,12 @@ public class AzureFileStorage implements FileStorage {
 			logger.debug("CloudStorageAccount: " + storageAccount);
 		}
 		catch (InvalidKeyException ike) {
-			final String message = "Chiave account Azure non valida. Stringa di connessione: " + connectionString;
+			final String message = "Chiave account Azure non valida. Stringa di connessione: \"" + connectionString + '"';
 			logger.error(message + " - " + ike.toString());
 			throw new FileStorageException(message, ike);
 		}
 		catch (URISyntaxException use) {
-			final String message = "Stringa di connessione Azure non valida: " + connectionString;
+			final String message = "Stringa di connessione Azure non valida: \"" + connectionString + '"';
 			logger.error(message + " - " + use.toString());
 			throw new FileStorageException(message, use);
 		}
