@@ -158,22 +158,25 @@ public class AzureFileStorage implements FileStorage {
 	private void setBlobContentType(final CloudBlockBlob blob, final String fileName) {
 		/* Perche' Microsoft non fa questa cosa automaticamente? */
 		try {
-			int index = fileName.indexOf('.');
+			int index = fileName.lastIndexOf('.');
 			if (index != -1) {
 				final String extension = fileName.substring(index).toLowerCase();
+				final String contentType;
 				if (".xbrl".equals(extension)) {
-					blob.getProperties().setContentType("application/xml");
+					contentType = "application/xml";
 				}
 				else if (".zip".equals(extension)) {
-					blob.getProperties().setContentType("application/zip");
-				}				
-				else {
-					blob.getProperties().setContentType(new MimetypesFileTypeMap().getContentType(fileName));
+					contentType = "application/zip";
 				}
+				else {
+					contentType = new MimetypesFileTypeMap().getContentType(fileName);
+				}
+				logger.info("Content type determinato per il file \"" + fileName + "\": " + contentType);
+				blob.getProperties().setContentType(contentType);
 			}
 		}
 		catch (RuntimeException re) {
-			logger.warn("Impossibile determinare il Content Type per il file \"" + fileName + "\" - " + re.toString());
+			logger.warn("Impossibile determinare il content type per il file \"" + fileName + "\" - " + re.toString());
 		}
 	}
 
