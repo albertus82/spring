@@ -171,7 +171,7 @@ public class AzureFileStorage implements FileStorage {
 				else {
 					contentType = new MimetypesFileTypeMap().getContentType(fileName);
 				}
-				logger.info("Content type determinato per il file \"" + fileName + "\": " + contentType);
+				logger.debug("Content type determinato per il file \"" + fileName + "\": " + contentType);
 				blob.getProperties().setContentType(contentType);
 			}
 		}
