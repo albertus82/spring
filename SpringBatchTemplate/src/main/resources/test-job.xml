@@ -11,15 +11,34 @@
 
 	<batch:job id="testJob" job-repository="jobRepository">
 
-		<batch:step id="testStep" next="">
+		<batch:step id="testStep" next="testChunk">
 			<batch:tasklet ref="testTasklet" />
+		</batch:step>
+
+		<batch:step id="testChunk">
+			<batch:tasklet>
+				<batch:chunk reader="testReader" processor="testProcessor"
+					writer="testWriter" commit-interval="1" />
+			</batch:tasklet>
 		</batch:step>
 
 	</batch:job>
 
-	<bean id="testTasklet" class="it.albertus.spring.batch.TestTasklet"
-		scope="step">
-		<property name="jdbcOperations" ref="jdbcOperations" />
+	<bean id="testTasklet" class="it.albertus.spring.batch.TestTasklet" />
+
+	<bean id="testReader" class="it.albertus.spring.batch.TestReader">
+		<property name="statement" value="SELECT text FROM b_test_source" />
 	</bean>
+
+	<bean id="testProcessor" class="it.albertus.spring.batch.TestProcessor" />
+
+	<bean id="testWriter" class="it.albertus.spring.batch.TestWriter">
+		<property name="statement"
+			value="INSERT INTO b_test_destination (id, length) VALUES (s_b_test_destination.NEXTVAL, ?)" />
+	</bean>
+
+	<!-- COMMIT solo alla fine
+	<bean id="defaultResultCompletionPolicy" class="org.springframework.batch.repeat.policy.DefaultResultCompletionPolicy" />
+	-->
 
 </beans>
