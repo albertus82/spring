@@ -44,7 +44,7 @@
 		class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
 		<property name="locations">
 			<list>
-				<value>classpath:application.properties</value>
+				<value>classpath:batch.properties</value>
 			</list>
 		</property>
 	</bean>
