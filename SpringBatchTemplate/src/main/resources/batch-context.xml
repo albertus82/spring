@@ -52,12 +52,11 @@
 	<bean id="asyncTaskExecutor" class="org.springframework.core.task.SimpleAsyncTaskExecutor" />
 
 	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource">
-		<property name="driverClassName" value="${db.jdbc.driver}" />
 		<property name="jdbcUrl" value="${db.jdbc.url}" />
 		<property name="username" value="${db.jdbc.user}" />
 		<property name="password" value="${db.jdbc.password}" />
-		<property name="autoCommit" value="false" />
 		<property name="maximumPoolSize" value="${db.jdbc.pool.size}" />
+		<property name="autoCommit" value="false" />
 	</bean>
 
 	<bean id="transactionManager"
