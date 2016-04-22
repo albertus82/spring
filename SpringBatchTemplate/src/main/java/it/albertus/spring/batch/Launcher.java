@@ -22,7 +22,7 @@ public class Launcher {
 	private Job testJob;
 
 	public static void main(final String... args) {
-		final ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("spring-context.xml");
+		final ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("batch-context.xml");
 		context.getBean(Launcher.class).launch(args);
 		context.close();
 	}

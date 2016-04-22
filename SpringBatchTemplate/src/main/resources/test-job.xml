@@ -27,14 +27,14 @@
 	<bean id="testTasklet" class="it.albertus.spring.batch.TestTasklet" />
 
 	<bean id="testReader" class="it.albertus.spring.batch.TestReader">
-		<property name="statement" value="SELECT text FROM b_test_source" />
+		<property name="statement" value="SELECT text_string FROM b_test_source" />
 	</bean>
 
 	<bean id="testProcessor" class="it.albertus.spring.batch.TestProcessor" />
 
 	<bean id="testWriter" class="it.albertus.spring.batch.TestWriter">
 		<property name="statement"
-			value="INSERT INTO b_test_destination (id, length) VALUES (s_b_test_destination.NEXTVAL, ?)" />
+			value="INSERT INTO b_test_destination (id, text_length) VALUES (s_b_test_destination.NEXTVAL, ?)" />
 	</bean>
 
 	<!-- COMMIT solo alla fine

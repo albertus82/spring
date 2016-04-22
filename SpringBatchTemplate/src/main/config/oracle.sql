@@ -125,28 +125,28 @@ CREATE TABLE b_test_source
 )
 /
 
-INSERT INTO b_test_source (text, id)
+INSERT INTO b_test_source (text_string, id)
      VALUES ('Lorem', s_b_test_source.NEXTVAL);
 
-INSERT INTO b_test_source (text, id)
+INSERT INTO b_test_source (text_string, id)
      VALUES ('ipsum', s_b_test_source.NEXTVAL);
 
-INSERT INTO b_test_source (text, id)
+INSERT INTO b_test_source (text_string, id)
      VALUES ('dolor', s_b_test_source.NEXTVAL);
 
-INSERT INTO b_test_source (text, id)
+INSERT INTO b_test_source (text_string, id)
      VALUES ('sit', s_b_test_source.NEXTVAL);
 
-INSERT INTO b_test_source (text, id)
+INSERT INTO b_test_source (text_string, id)
      VALUES ('amet', s_b_test_source.NEXTVAL);
 
-INSERT INTO b_test_source (text, id)
+INSERT INTO b_test_source (text_string, id)
      VALUES ('consectetur', s_b_test_source.NEXTVAL);
 
-INSERT INTO b_test_source (text, id)
+INSERT INTO b_test_source (text_string, id)
      VALUES ('adipiscing', s_b_test_source.NEXTVAL);
 
-INSERT INTO b_test_source (text, id)
+INSERT INTO b_test_source (text_string, id)
      VALUES ('elit', s_b_test_source.NEXTVAL);
 
 COMMIT;

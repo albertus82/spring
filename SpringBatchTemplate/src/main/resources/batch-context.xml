@@ -53,19 +53,13 @@
 
 	<bean id="asyncTaskExecutor" class="org.springframework.core.task.SimpleAsyncTaskExecutor" />
 
-	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource">
 		<property name="driverClassName" value="${db.jdbc.driver}" />
-		<property name="url" value="${db.jdbc.url}" />
+		<property name="jdbcUrl" value="${db.jdbc.url}" />
 		<property name="username" value="${db.jdbc.user}" />
 		<property name="password" value="${db.jdbc.password}" />
-		<property name="defaultAutoCommit" value="false" />
-		<property name="maxActive" value="${db.jdbc.pool.size}" />
-		<property name="maxWait" value="10000" />
-		<property name="validationQuery" value="${db.jdbc.validationQuery}" />
-		<property name="testWhileIdle" value="${db.jdbc.testWhileIdle}" />
-		<property name="timeBetweenEvictionRunsMillis" value="1200000" />
-		<property name="numTestsPerEvictionRun" value="5" />
-		<property name="minEvictableIdleTimeMillis" value="1800000" />
+		<property name="autoCommit" value="false" />
+		<property name="maximumPoolSize" value="${db.jdbc.pool.size}" />
 	</bean>
 
 	<bean id="transactionManager"
