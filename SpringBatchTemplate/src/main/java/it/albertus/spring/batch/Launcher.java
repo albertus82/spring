@@ -9,6 +9,7 @@ import org.springframework.batch.core.JobParameter;
 import org.springframework.batch.core.JobParameters;
 import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
@@ -21,6 +22,9 @@ public class Launcher {
 
 	@Autowired
 	private Job testJob;
+
+	@Value("${cron.testJob}")
+	private String cronExpression;
 
 	public static void main(final String... args) {
 		final ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("batch-context.xml");
@@ -40,6 +44,7 @@ public class Launcher {
 		final Date startDate = new Date();
 		parameters.put("startDate", new JobParameter(startDate.toString()));
 		parameters.put("startTimeMillis", new JobParameter(startDate.getTime()));
+		parameters.put("cronExpression", new JobParameter(cronExpression));
 		final JobParameters params = new JobParameters(parameters);
 		try {
 			jobLauncher.run(testJob, params);
