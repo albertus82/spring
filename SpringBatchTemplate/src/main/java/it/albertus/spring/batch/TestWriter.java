@@ -17,15 +17,25 @@ public class TestWriter implements ItemWriter<Integer> {
 
 	private String statement;
 
+	private double errorPercentage;
+
 	@Override
 	public void write(final List<? extends Integer> items) throws Exception {
 		for (int item : items) {
 			jdbcOperations.update(statement, item);
+			if (Math.random() > (100.0 - errorPercentage) / 100.0) {
+				throw new IllegalStateException("Eccezione simulata!");
+			}
+			System.out.println(item);
 		}
 	}
 
 	public final void setStatement(String statement) {
 		this.statement = statement;
+	}
+
+	public void setErrorPercentage(double errorPercentage) {
+		this.errorPercentage = errorPercentage;
 	}
 
 }

@@ -14,8 +14,15 @@
 
 		<batch:step id="testChunk">
 			<batch:tasklet>
+				<batch:listeners merge="true">
+					<batch:listener ref="testChunkListener" />
+				</batch:listeners>
 				<batch:chunk reader="testReader" processor="testProcessor"
-					writer="testWriter" commit-interval="1" />
+					writer="testWriter" commit-interval="1" skip-limit="10">
+					<batch:skippable-exception-classes>
+						<batch:include class="java.lang.IllegalStateException" />
+					</batch:skippable-exception-classes>
+				</batch:chunk>
 			</batch:tasklet>
 		</batch:step>
 
@@ -32,10 +39,12 @@
 	<bean id="testWriter" class="it.albertus.spring.batch.TestWriter">
 		<property name="statement"
 			value="INSERT INTO b_test_destination (id, text_length) VALUES (s_b_test_destination.NEXTVAL, ?)" />
+		<property name="errorPercentage" value="5" />
 	</bean>
 
-	<!-- COMMIT solo alla fine
-	<bean id="defaultResultCompletionPolicy" class="org.springframework.batch.repeat.policy.DefaultResultCompletionPolicy" />
-	-->
+	<bean id="testChunkListener" class="it.albertus.spring.batch.TestChunkListener" />
+
+	<bean id="defaultResultCompletionPolicy"
+		class="org.springframework.batch.repeat.policy.DefaultResultCompletionPolicy" />
 
 </beans>

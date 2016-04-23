@@ -1,5 +1,6 @@
 package it.albertus.spring.batch;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,13 +24,22 @@ public class Launcher {
 
 	public static void main(final String... args) {
 		final ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("batch-context.xml");
-		context.getBean(Launcher.class).launch(args);
-		context.close();
+		final Thread shutdownHook = new Thread("shutdownHook") {
+			@Override
+			public void run() {
+				if (context != null) {
+					context.close();
+				}
+			}
+		};
+		Runtime.getRuntime().addShutdownHook(shutdownHook);
 	}
 
-	private void launch(final String[] args) {
+	public void launch() {
 		final Map<String, JobParameter> parameters = new HashMap<String, JobParameter>();
-		parameters.put("currentTimeMillis", new JobParameter(System.currentTimeMillis()));
+		final Date startDate = new Date();
+		parameters.put("startDate", new JobParameter(startDate.toString()));
+		parameters.put("startTimeMillis", new JobParameter(startDate.getTime()));
 		final JobParameters params = new JobParameters(parameters);
 		try {
 			jobLauncher.run(testJob, params);
