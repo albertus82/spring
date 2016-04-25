@@ -108,20 +108,19 @@ CREATE SEQUENCE s_b_test_destination
 
 CREATE SEQUENCE s_b_test_source
 /
-
 CREATE TABLE b_test_destination
 (
-    id            NUMBER (19, 0) NOT NULL,
+    id            NUMBER (19, 0) NOT NULL PRIMARY KEY,
     text_length   NUMBER (5, 0) NOT NULL,
-    date_insert   DATE DEFAULT SYSDATE NOT NULL
+    date_insert   TIMESTAMP (3) DEFAULT SYSTIMESTAMP NOT NULL
 )
 /
 
 CREATE TABLE b_test_source
 (
-    id            NUMBER (19, 0) NOT NULL,
-    text_string   VARCHAR2 (2000 BYTE) NOT NULL,
-    date_insert   DATE DEFAULT SYSDATE NOT NULL
+    id            NUMBER (19, 0) NOT NULL PRIMARY KEY,
+    text_string   VARCHAR2 (2000 CHAR) NOT NULL,
+    date_insert   TIMESTAMP (3) DEFAULT SYSTIMESTAMP NOT NULL
 )
 /
 

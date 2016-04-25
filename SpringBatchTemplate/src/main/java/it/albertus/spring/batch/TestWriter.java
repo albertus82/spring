@@ -24,7 +24,12 @@ public class TestWriter implements ItemWriter<Integer> {
 		for (int item : items) {
 			jdbcOperations.update(statement, item);
 			if (Math.random() > (100.0 - errorPercentage) / 100.0) {
-				throw new IllegalStateException("Eccezione simulata in fase di scrittura (probabilit\u00E0: " + errorPercentage + "%).");
+				if (Math.random() < 0.5) {
+					throw new RuntimeException("Eccezione simulata in fase di scrittura (probabilit\u00E0: " + errorPercentage + "%).");
+				}
+				else {
+					throw new IllegalStateException("Eccezione simulata in fase di scrittura (probabilit\u00E0: " + errorPercentage + "%).");
+				}
 			}
 			System.out.println(item);
 		}
